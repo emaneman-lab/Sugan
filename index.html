@@ -733,19 +733,24 @@
             background: #030201;
             overflow: hidden;
             min-height: 360px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .scroll-card-image img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            opacity: 0.88;
+            object-fit: contain; /* FIXED: Prevents image cropping/stretching, displays full screenshot */
+            background: #050505;
+            padding: 8px;
+            opacity: 0.95;
             transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform;
         }
 
         .scroll-card:hover .scroll-card-image img {
-            transform: scale(1.08);
+            transform: scale(1.04);
         }
 
         /* Carousel Navigation Hint Bar */
@@ -807,7 +812,7 @@
                 padding: 2rem;
             }
             .scroll-card-image {
-                min-height: 240px;
+                min-height: 260px;
             }
             .dashboard-container { 
                 flex-direction: column; 
@@ -1086,7 +1091,7 @@
         </div>  
     </section>  
 
-    <!-- PROJECTS PAGE (FIXED WITH IMAGE EXTENSIONS) -->  
+    <!-- PROJECTS PAGE -->  
     <section id="page-projects" class="page">  
         <h2 class="img-style-header reveal-element delay-1">Selected Work</h2>  
 
@@ -1276,28 +1281,28 @@
 
 <!-- Interactive Scripts -->  
 <script>  
-    // Bulletproof View Counter using api.counterapi.dev (Reliable & Free API)
-    async function updateViewCount() {
+    // Live View Counter using LocalStorage
+    function updateViewCount() {
         try {
-            const sessionCounted = sessionStorage.getItem('portfolio_view_counted');
-            let url = 'https://api.counterapi.dev/v1/suganya_portfolio/visits/up';
-            if (sessionCounted) {
-                url = 'https://api.counterapi.dev/v1/suganya_portfolio/visits';
-            }
+            let views = localStorage.getItem('suganya_portfolio_total_views');
+            const hasCountedSession = sessionStorage.getItem('suganya_session_counted');
 
-            const response = await fetch(url);
-            const data = await response.json();
-            
-            if (data && typeof data.count !== 'undefined') {
-                document.getElementById('view-count').textContent = data.count;
+            if (!views) {
+                views = 36;
             } else {
-                document.getElementById('view-count').textContent = "36";
+                views = parseInt(views, 10);
             }
 
-            sessionStorage.setItem('portfolio_view_counted', 'true');
+            if (!hasCountedSession) {
+                views += 1;
+                localStorage.setItem('suganya_portfolio_total_views', views);
+                sessionStorage.setItem('suganya_session_counted', 'true');
+            }
+
+            document.getElementById('view-count').textContent = views;
         } catch (error) {
-            console.error("View counter fallback triggered:", error);
-            document.getElementById('view-count').textContent = "36"; // Fallback static number
+            console.error("View counter error:", error);
+            document.getElementById('view-count').textContent = "36";
         }
     }
 
@@ -1418,6 +1423,7 @@
             particlesArray[i].update();  
             particlesArray[i].draw();  
         }  
+
         requestAnimationFrame(animateParticles);  
     }  
 
@@ -1463,7 +1469,7 @@
     });
 
     // Mouse Glow Interaction (Desktop Only)
-    const mouseGroot = document.getElementById('mouse-glow');  
+    const mouseGlow = document.getElementById('mouse-glow');  
     const isMobile = window.innerWidth <= 768;
 
     if (!isMobile) {
@@ -1473,9 +1479,9 @@
         document.addEventListener('mousemove', (e) => {  
             mouseX = e.clientX;
             mouseY = e.clientY;
-            mouseGrows.style.opacity = '1';  
-            clearTimeout(mouseGrows.timeout);  
-            mouseGrows.timeout = setTimeout(() => { mouseGrows.style.opacity = '0'; }, 2500);  
+            mouseGlow.style.opacity = '1';  
+            clearTimeout(mouseGlow.timeout);  
+            mouseGlow.timeout = setTimeout(() => { mouseGlow.style.opacity = '0'; }, 2500);  
         });  
 
         function updateMouseGlow() {
