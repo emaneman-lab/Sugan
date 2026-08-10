@@ -167,7 +167,7 @@
             opacity: 0.7;  
         }  
 
-        /* Dashboard Header Layout - Perfectly Balanced Header */  
+        /* Dashboard Header Layout */  
         .dashboard-container {  
             max-width: 1200px;  
             margin: 0 auto;  
@@ -312,19 +312,14 @@
         }  
         .nav-btn.active::before { opacity: 1; }  
 
-        /* Responsive Breakpoint for Mobile Screens */
         @media(max-width: 600px) {
             .dashboard-container {
                 flex-direction: column;
                 align-items: stretch;
                 gap: 1.2rem;
             }
-            .profile-info h1 {
-                white-space: normal;
-            }
-            .profile-info .tagline {
-                white-space: normal;
-            }
+            .profile-info h1 { white-space: normal; }
+            .profile-info .tagline { white-space: normal; }
             .vertical-nav {
                 width: 100%;
                 display: grid;
@@ -475,7 +470,7 @@
             border: 1px solid var(--card-border);  
             border-radius: 8px;  
             padding: 0.5rem 1rem 0.5rem 0.5rem;  
-            display: flex; 
+            display: flex;  
             align-items: center;  
             gap: 0.8rem;  
             backdrop-filter: blur(8px);
@@ -541,143 +536,89 @@
         .edu-period { font-family: var(--font-code); font-size: 0.65rem; color: rgba(255, 255, 255, 0.5); letter-spacing: 0.05em; }  
 
         /* =======================================================
-           ULTRA-HD ADAPTIVE HORIZONTAL SCROLL CAROUSEL & FIXED PREVIEWS
+           FLIPPABLE PROJECT CARDS (NO HORIZONTAL SCROLLING, TAP TO FLIP)
            ======================================================= */
-        .project-scroll-container {
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 380px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
             position: relative;
             width: 100%;
-            margin-top: 1rem;
-            overflow: hidden;
-            padding: 0.4rem 0;
+            height: 100%;
+            text-align: left;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-style: preserve-3d;
         }
 
-        .project-scroll-track {
-            display: flex;
-            gap: 1.5rem;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            padding: 0.5rem;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
         }
 
-        .scroll-card {
-            flex: 0 0 min(720px, 88vw);
-            scroll-snap-align: center;
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 12px;
-            display: grid;
-            grid-template-columns: 1.1fr 1fr;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
             backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
         }
 
-        .scroll-card-content {
-            padding: clamp(1.2rem, 2.2vw, 2.2rem);
+        .flip-card-front {
+            padding: 1.5rem;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        .scroll-card-tag {
-            font-family: var(--font-code);
-            font-size: 0.65rem;
-            color: var(--cyan-accent);
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            margin-bottom: 0.4rem;
-        }
-
-        .scroll-card-title {
-            font-family: var(--font-heading);
-            font-size: clamp(1.15rem, 1.8vw, 1.6rem);
-            font-weight: 700;
-            color: var(--text-main);
-            line-height: 1.2;
-            margin-bottom: 0.5rem;
-        }
-
-        .scroll-card-desc {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-            margin-bottom: 0.8rem;
-        }
-
-        /* FIXED IMAGE CONTAINER OVERFLOW: Prevents bottom half cutting off */
-        .scroll-card-image {
-            position: relative;
-            background: #030201;
-            overflow: hidden;
-            height: 100%;
-            min-height: 280px;
+        .flip-card-back {
+            transform: rotateY(180deg);
+            background: #050403;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .scroll-card-image img {
+        .flip-card-back img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* FIXED: Shows full project screenshot without cropping */
-            background: #050505;
-            padding: 6px;
+            object-fit: contain;
+            background: #030201;
+            padding: 8px;
             display: block;
-            opacity: 0.95;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .scroll-card:hover .scroll-card-image img {
-            transform: scale(1.03);
-        }
-
-        .scroll-hint-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 0.6rem;
-            padding: 0 0.4rem;
-        }
-
-        .scroll-hint-text {
+        .flip-hint {
             font-family: var(--font-code);
             font-size: 0.6rem;
-            color: var(--text-muted);
-            letter-spacing: 0.08em;
+            color: var(--cyan-accent);
             text-transform: uppercase;
-        }
-
-        .scroll-nav-controls {
+            letter-spacing: 0.1em;
+            margin-top: 1rem;
             display: flex;
+            align-items: center;
             gap: 6px;
-        }
-
-        .scroll-nav-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            color: var(--text-main);
-            width: 30px; height: 30px;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer;
-            font-size: 0.85rem;
+            opacity: 0.8;
         }
 
         .scroll-card.hidden {
             display: none !important;
-        }
-
-        @media(max-width: 900px) {
-            .scroll-card {
-                flex: 0 0 100%;
-                grid-template-columns: 1fr;
-            }
-            .scroll-card-image {
-                min-height: 240px;
-            }
         }
 
         /* Filter Buttons */
@@ -699,7 +640,7 @@
             border-color: var(--cyan-accent);
         }
 
-        .project-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }  
+        .project-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 1rem; }  
         .tag {  
             background: rgba(255, 255, 255, 0.03); 
             border: 1px solid rgba(255, 255, 255, 0.07);  
@@ -810,19 +751,18 @@
 <div class="ai-hex-bg" id="hex-bg"></div>  
 <canvas id="particle-canvas"></canvas>  
   
-<!-- Top Dashboard Header - Balanced Side-by-Side Layout Across All Devices -->  
+<!-- Top Dashboard Header -->  
 <header class="dashboard-container">  
     <div class="profile-info">  
         <h1>Suganya S</h1>  
         <h3 class="subtitle">B.TECH AI&DS</h3>  
         <p class="tagline">BUILDING &bull; LEARNING &bull; EXPERIMENTING</p>  
-        <!-- 100% Reliable GitHub Badge Live View Counter -->
         <div class="stats">  
             <img src="https://komarev.com/ghpvc/?username=suganyas2382006-sketch&color=ead472&style=flat" alt="Portfolio Views" style="vertical-align: middle; height: 20px;" />  
         </div>  
     </div>  
       
-    <!-- Navigation - Locked on Right Side with Clean Universal SVG Symbols -->  
+    <!-- Navigation -->  
     <nav class="vertical-nav">  
         <button class="nav-btn active" data-target="page-home" aria-label="Home">
             <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
@@ -912,12 +852,12 @@
         </div>  
     </section>  
 
-    <!-- PROJECTS PAGE -->  
+    <!-- PROJECTS PAGE (REPLACED HORIZONTAL SCROLL WITH FLIPPABLE CARDS) -->  
     <section id="page-projects" class="page">  
         <h2 class="img-style-header reveal-element delay-1">Selected Work</h2>  
 
         <!-- Interactive Category Filters -->
-        <div class="project-filters reveal-element delay-2" style="display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;">
+        <div class="project-filters reveal-element delay-2" style="display: flex; gap: 8px; margin-bottom: 1.2rem; flex-wrap: wrap;">
             <button class="filter-btn active" data-filter="all">All Systems</button>
             <button class="filter-btn" data-filter="AI / COMPUTER VISION">AI & Vision</button>
             <button class="filter-btn" data-filter="MACHINE LEARNING">Machine Learning</button>
@@ -925,131 +865,150 @@
             <button class="filter-btn" data-filter="AUTOMATION">Automation</button>
         </div>
           
-        <!-- Smooth Horizontal Scroll Track -->
-        <div class="project-scroll-container reveal-element delay-3">
-            <div class="project-scroll-track" id="scroll-track">
-                
-                <!-- Project 1: OptiVoyage -->  
-                <div class="scroll-card" data-category="AI / COMPUTER VISION">  
-                    <div class="scroll-card-content">
+        <!-- Flippable Grid Container (No Horizontal Scrolling, Tap to Flip) -->
+        <div class="projects-grid reveal-element delay-3" id="projects-grid">
+            
+            <!-- Project 1: OptiVoyage -->  
+            <div class="flip-card" data-category="AI / COMPUTER VISION" onclick="this.classList.toggle('flipped')">  
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
                         <div>
                             <div class="scroll-card-tag">SYSTEM 01 // OPTIMIZATION</div>
                             <h3 class="scroll-card-title">OptiVoyage</h3>  
                             <p class="scroll-card-desc">Intelligent maritime routing system to identify optimized vessel routes while analyzing distance, ETA, fuel savings, and CO₂ reduction.</p>  
                         </div>
-                        <div class="project-tags">  
-                            <span class="tag">AI Data</span>  
-                            <span class="tag">SQL</span>  
-                        </div>  
+                        <div>
+                            <div class="project-tags">  
+                                <span class="tag">AI Data</span>  
+                                <span class="tag">SQL</span>  
+                            </div>  
+                            <div class="flip-hint">&#82; Tap card to view screenshot</div>
+                        </div>
                     </div>
-                    <div class="scroll-card-image">
+                    <div class="flip-card-back">
                         <img src="assets/image1.jpg" onerror="this.onerror=null; this.src='assets/image1.png';" alt="OptiVoyage Preview">
                     </div>
-                </div>  
+                </div>
+            </div>  
 
-                <!-- Project 2: NeuroVision AI -->  
-                <div class="scroll-card" data-category="AI / COMPUTER VISION">  
-                    <div class="scroll-card-content">
+            <!-- Project 2: NeuroVision AI -->  
+            <div class="flip-card" data-category="AI / COMPUTER VISION" onclick="this.classList.toggle('flipped')">  
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
                         <div>
                             <div class="scroll-card-tag">SYSTEM 02 // AI & VISION</div>
                             <h3 class="scroll-card-title">NeuroVision AI</h3>  
                             <p class="scroll-card-desc">AI-powered MRI analysis combining deep learning, medical image classification, severity analysis, and explainable AI interfaces.</p>  
                         </div>
-                        <div class="project-tags">  
-                            <span class="tag">TensorFlow</span>  
-                            <span class="tag">Python</span>  
-                        </div>  
+                        <div>
+                            <div class="project-tags">  
+                                <span class="tag">TensorFlow</span>  
+                                <span class="tag">Python</span>  
+                            </div>  
+                            <div class="flip-hint">&#82; Tap card to view screenshot</div>
+                        </div>
                     </div>
-                    <div class="scroll-card-image">
+                    <div class="flip-card-back">
                         <img src="assets/image2.jpg" onerror="this.onerror=null; this.src='assets/image2.png';" alt="NeuroVision AI Preview">
                     </div>
-                </div>  
+                </div>
+            </div>  
 
-                <!-- Project 3: Data cleaning and reporting Automation -->  
-                <div class="scroll-card" data-category="AUTOMATION">  
-                    <div class="scroll-card-content">
+            <!-- Project 3: Data cleaning and reporting Automation -->  
+            <div class="flip-card" data-category="AUTOMATION" onclick="this.classList.toggle('flipped')">  
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
                         <div>
                             <div class="scroll-card-tag">SYSTEM 03 // AUTOMATION</div>
-                            <h3 class="scroll-card-title">Data cleaning and reporting Automation</h3>  
+                            <h3 class="scroll-card-title">Data cleaning & reporting Automation</h3>  
                             <p class="scroll-card-desc">Automate data cleaning and reporting workflows. Handle missing values, duplicates, and generate automated visual reports.</p>  
                         </div>
-                        <div class="project-tags">  
-                            <span class="tag">Python</span>  
-                            <span class="tag">Excel</span>  
-                            <span class="tag">Power BI</span>  
-                        </div>  
+                        <div>
+                            <div class="project-tags">  
+                                <span class="tag">Python</span>  
+                                <span class="tag">Excel</span>  
+                                <span class="tag">Power BI</span>  
+                            </div>  
+                            <div class="flip-hint">&#82; Tap card to view screenshot</div>
+                        </div>
                     </div>
-                    <div class="scroll-card-image">
+                    <div class="flip-card-back">
                         <img src="assets/image3.jpg" onerror="this.onerror=null; this.src='assets/image3.png';" alt="Automation Preview">
                     </div>
-                </div>  
+                </div>
+            </div>  
 
-                <!-- Project 4: Predictive Analytics Using Historical Data -->  
-                <div class="scroll-card" data-category="MACHINE LEARNING">  
-                    <div class="scroll-card-content">
+            <!-- Project 4: Predictive Analytics Using Historical Data -->  
+            <div class="flip-card" data-category="MACHINE LEARNING" onclick="this.classList.toggle('flipped')">  
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
                         <div>
                             <div class="scroll-card-tag">SYSTEM 04 // MODELING</div>
-                            <h3 class="scroll-card-title">Predictive Analytics Using Historical Data</h3>  
+                            <h3 class="scroll-card-title">Predictive Analytics</h3>  
                             <p class="scroll-card-desc">Build a predictive model to forecast future trends using regression or time-series models, cleaning and preprocessing datasets.</p>  
                         </div>
-                        <div class="project-tags">  
-                            <span class="tag">Regression</span>  
-                            <span class="tag">Time-Series</span>  
-                        </div>  
+                        <div>
+                            <div class="project-tags">  
+                                <span class="tag">Regression</span>  
+                                <span class="tag">Time-Series</span>  
+                            </div>  
+                            <div class="flip-hint">&#82; Tap card to view screenshot</div>
+                        </div>
                     </div>
-                    <div class="scroll-card-image">
+                    <div class="flip-card-back">
                         <img src="assets/image4.jpg" onerror="this.onerror=null; this.src='assets/image4.png';" alt="Predictive Analytics Preview">
                     </div>
-                </div>  
+                </div>
+            </div>  
 
-                <!-- Project 5: Customer Segmentation -->  
-                <div class="scroll-card" data-category="MACHINE LEARNING">  
-                    <div class="scroll-card-content">
+            <!-- Project 5: Customer Segmentation -->  
+            <div class="flip-card" data-category="MACHINE LEARNING" onclick="this.classList.toggle('flipped')">  
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
                         <div>
                             <div class="scroll-card-tag">SYSTEM 05 // MACHINE LEARNING</div>
                             <h3 class="scroll-card-title">Customer Segmentation</h3>  
                             <p class="scroll-card-desc">Segment customers based on behavior and demographics using clustering tools like Python (scikit-learn) and Power BI.</p>  
                         </div>
-                        <div class="project-tags">  
-                            <span class="tag">scikit-learn</span>  
-                            <span class="tag">Python</span>  
-                        </div>  
+                        <div>
+                            <div class="project-tags">  
+                                <span class="tag">scikit-learn</span>  
+                                <span class="tag">Python</span>  
+                            </div>  
+                            <div class="flip-hint">&#82; Tap card to view screenshot</div>
+                        </div>
                     </div>
-                    <div class="scroll-card-image">
+                    <div class="flip-card-back">
                         <img src="assets/image5.jpg" onerror="this.onerror=null; this.src='assets/image5.png';" alt="Customer Segmentation Preview">
                     </div>
-                </div>  
+                </div>
+            </div>  
 
-                <!-- Project 6: Sales and revenue analysis dashboard -->  
-                <div class="scroll-card" data-category="DATA ANALYTICS">  
-                    <div class="scroll-card-content">
+            <!-- Project 6: Sales and revenue analysis dashboard -->  
+            <div class="flip-card" data-category="DATA ANALYTICS" onclick="this.classList.toggle('flipped')">  
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
                         <div>
                             <div class="scroll-card-tag">SYSTEM 06 // ANALYTICS</div>
-                            <h3 class="scroll-card-title">Sales and revenue analysis dashboard</h3>  
+                            <h3 class="scroll-card-title">Sales & Revenue Dashboard</h3>  
                             <p class="scroll-card-desc">Build a dashboard to analyze sales and revenue data, visualize KPIs like total sales, revenue trends, and top-performing products.</p>  
                         </div>
-                        <div class="project-tags">  
-                            <span class="tag">Excel</span>  
-                            <span class="tag">Power BI</span>  
-                            <span class="tag">CSV</span>  
-                        </div>  
+                        <div>
+                            <div class="project-tags">  
+                                <span class="tag">Excel</span>  
+                                <span class="tag">Power BI</span>  
+                                <span class="tag">CSV</span>  
+                            </div>  
+                            <div class="flip-hint">&#82; Tap card to view screenshot</div>
+                        </div>
                     </div>
-                    <div class="scroll-card-image">
+                    <div class="flip-card-back">
                         <img src="assets/image6.jpg" onerror="this.onerror=null; this.src='assets/image6.png';" alt="Sales Dashboard Preview">
                     </div>
-                </div>  
+                </div>
+            </div>  
 
-            </div>
         </div>  
-
-        <!-- Scroll Navigation Controls -->
-        <div class="scroll-hint-bar reveal-element delay-4">
-            <span class="scroll-hint-text">&larr; Swipe, scroll, or click arrows &rarr;</span>
-            <div class="scroll-nav-controls">
-                <button class="scroll-nav-btn" id="scroll-left-btn">&larr;</button>
-                <button class="scroll-nav-btn" id="scroll-right-btn">&rarr;</button>
-            </div>
-        </div>
     </section>  
 
     <!-- CONNECT PAGE -->  
@@ -1210,7 +1169,7 @@
         for (let i = 0; i < numberOfParticles; i++) particlesArray.push(new Particle());  
     }  
 
-    function animateParticles() {  
+    fn = animateParticles = function() {  
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);  
         for (let i = 0; i < particlesArray.length; i++) {  
             particlesArray[i].update();  
@@ -1222,21 +1181,9 @@
     initParticles();  
     animateParticles();  
 
-    // Horizontal Scroll & Filter Controls
-    const scrollTrack = document.getElementById('scroll-track');
-    const scrollLeftBtn = document.getElementById('scroll-left-btn');
-    const scrollRightBtn = document.getElementById('scroll-right-btn');
+    // Filter Controls for Flippable Grid Cards
     const filterButtons = document.querySelectorAll('.filter-btn');
-    const scrollCards = document.querySelectorAll('.scroll-card');
-
-    if (scrollLeftBtn && scrollRightBtn && scrollTrack) {
-        scrollLeftBtn.addEventListener('click', () => {  
-            scrollTrack.scrollBy({ left: -scrollTrack.clientWidth * 0.8, behavior: 'smooth' });  
-        });  
-        scrollRightBtn.addEventListener('click', () => {  
-            scrollTrack.scrollBy({ left: scrollTrack.clientWidth * 0.8, behavior: 'smooth' });  
-        });  
-    }
+    const flipCards = document.querySelectorAll('.flip-card');
 
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -1245,7 +1192,7 @@
 
             const filterValue = btn.getAttribute('data-filter');
 
-            scrollCards.forEach(card => {
+            flipCards.forEach(card => {
                 const category = card.getAttribute('data-category');
                 if (filterValue === 'all' || category === filterValue) {
                     card.classList.remove('hidden');
@@ -1253,10 +1200,6 @@
                     card.classList.add('hidden');
                 }
             });
-
-            if (scrollTrack) {
-                scrollTrack.scrollTo({ left: 0, behavior: 'smooth' });
-            }
         });
     });
 
