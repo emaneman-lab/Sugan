@@ -167,7 +167,7 @@
             opacity: 0.7;  
         }  
 
-        /* Dashboard Header Layout - Balanced Side-by-Side Across All Devices */  
+        /* Dashboard Header Layout - Perfectly Balanced Single Row Header Across All Devices */  
         .dashboard-container {  
             max-width: 1200px;  
             margin: 0 auto;  
@@ -249,7 +249,7 @@
             align-items: center;
         }  
 
-        /* Navigation - Compact Right-Aligned Column with Unique Emojis */  
+        /* Navigation - Compact Right-Aligned Column with Universal Intuitive SVG Icons */  
         .vertical-nav {  
             display: flex;  
             flex-direction: column;  
@@ -264,7 +264,6 @@
             border: 1px solid var(--card-border);  
             border-radius: 6px;  
             color: var(--text-muted);  
-            font-size: 1.1rem;  
             padding: 8px 10px;  
             text-align: center;  
             cursor: pointer;  
@@ -277,6 +276,17 @@
             backdrop-filter: blur(8px);
             width: 100%;
         }  
+
+        .nav-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: var(--transition-hover);
+        }
 
         .nav-btn::before {  
             content: '';  
@@ -801,12 +811,20 @@
         </div>  
     </div>  
       
-    <!-- Navigation - Locked on the Right Side with Unique Emojis -->  
+    <!-- Navigation - Locked on Right Side with Clean Universal SVG Symbols -->  
     <nav class="vertical-nav">  
-        <button class="nav-btn active" data-target="page-home" aria-label="Home">🔮</button>  
-        <button class="nav-btn" data-target="page-education" aria-label="Education">📜</button>  
-        <button class="nav-btn" data-target="page-projects" aria-label="Projects">⚡</button>  
-        <button class="nav-btn" data-target="page-connect" aria-label="Connect">🌌</button>  
+        <button class="nav-btn active" data-target="page-home" aria-label="Home">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        </button>  
+        <button class="nav-btn" data-target="page-education" aria-label="Education">
+            <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+        </button>  
+        <button class="nav-btn" data-target="page-projects" aria-label="Projects">
+            <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+        </button>  
+        <button class="nav-btn" data-target="page-connect" aria-label="Connect">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        </button>  
     </nav>  
 </header>  
 
