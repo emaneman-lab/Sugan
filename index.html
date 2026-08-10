@@ -167,7 +167,7 @@
             opacity: 0.7;  
         }  
 
-        /* Dashboard Header Layout - Perfectly Balanced Single Row Header Across All Devices */  
+        /* Dashboard Header Layout - Perfectly Balanced Header */  
         .dashboard-container {  
             max-width: 1200px;  
             margin: 0 auto;  
@@ -476,7 +476,7 @@
             border-radius: 8px;  
             padding: 0.5rem 1rem 0.5rem 0.5rem;  
             display: flex; 
-            align-items: center; 
+            align-items: center;  
             gap: 0.8rem;  
             backdrop-filter: blur(8px);
         }  
@@ -540,7 +540,9 @@
         .edu-institution { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.3rem; font-weight: 400; }  
         .edu-period { font-family: var(--font-code); font-size: 0.65rem; color: rgba(255, 255, 255, 0.5); letter-spacing: 0.05em; }  
 
-        /* Horizontal Scroll Carousel */
+        /* =======================================================
+           ULTRA-HD ADAPTIVE HORIZONTAL SCROLL CAROUSEL & FIXED PREVIEWS
+           ======================================================= */
         .project-scroll-container {
             position: relative;
             width: 100%;
@@ -605,11 +607,13 @@
             margin-bottom: 0.8rem;
         }
 
+        /* FIXED IMAGE CONTAINER OVERFLOW: Prevents bottom half cutting off */
         .scroll-card-image {
             position: relative;
             background: #030201;
             overflow: hidden;
-            min-height: 240px;
+            height: 100%;
+            min-height: 280px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -618,9 +622,16 @@
         .scroll-card-image img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* FIXED: Shows full project screenshot without cropping */
+            background: #050505;
+            padding: 6px;
             display: block;
             opacity: 0.95;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .scroll-card:hover .scroll-card-image img {
+            transform: scale(1.03);
         }
 
         .scroll-hint-bar {
@@ -665,7 +676,7 @@
                 grid-template-columns: 1fr;
             }
             .scroll-card-image {
-                min-height: 200px;
+                min-height: 240px;
             }
         }
 
