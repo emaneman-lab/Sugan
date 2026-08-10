@@ -741,9 +741,8 @@
         .scroll-card-image img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* FIXED: Prevents image cropping/stretching, displays full screenshot */
-            background: #050505;
-            padding: 8px;
+            object-fit: cover; /* PERFECT FULL IMAGE FILL */
+            display: block;
             opacity: 0.95;
             transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform;
@@ -812,7 +811,7 @@
                 padding: 2rem;
             }
             .scroll-card-image {
-                min-height: 260px;
+                min-height: 280px; /* Gives plenty of height for full preview screenshot display on mobile */
             }
             .dashboard-container { 
                 flex-direction: column; 
@@ -1450,6 +1449,7 @@
     // Filtering Logic for Horizontal Carousel
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
+            filterNames = btn.getAttribute('data-filter');
             filterButtons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
