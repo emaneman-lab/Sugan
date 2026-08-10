@@ -202,6 +202,7 @@
             justify-content: space-between;  
             align-items: flex-start;  
             position: relative;
+            gap: 2rem;
         }  
 
         .dashboard-container::after {
@@ -218,6 +219,7 @@
         .profile-info {
             position: relative;
             padding: 0.5rem 0;
+            flex: 1;
         }
 
         .profile-info::before {
@@ -236,7 +238,7 @@
 
         .profile-info h1 {  
             font-family: var(--font-heading);  
-            font-size: clamp(2.8rem, 7.5vw, 5.8rem);  
+            font-size: clamp(2.5rem, 6vw, 5.8rem);  
             font-weight: 700;  
             color: var(--text-main);  
             margin-bottom: 0.2rem;  
@@ -273,18 +275,19 @@
 
         .profile-info .tagline {  
             font-family: var(--font-code);  
-            font-size: 0.8rem;  
+            font-size: 0.75rem;  
             color: var(--text-muted);  
-            margin-bottom: 1.5rem;  
+            margin-bottom: 1.2rem;  
             font-weight: 400;  
-            letter-spacing: 0.12em;  
+            letter-spacing: 0.1em;  
             text-transform: uppercase;  
             display: flex;
+            flex-wrap: wrap;
             gap: 8px;
         }  
 
         .profile-info .stats {  
-            margin-top: 1.2rem;  
+            margin-top: 1rem;  
             font-size: 0.8rem;  
             color: var(--text-muted);  
             font-family: var(--font-code);  
@@ -296,7 +299,7 @@
           
         .profile-info .stats span {  
             font-family: var(--font-heading);  
-            font-size: 2rem;  
+            font-size: 1.8rem;  
             font-weight: 700;  
             color: var(--text-main);  
             display: inline-block;  
@@ -306,13 +309,14 @@
             -webkit-text-fill-color: transparent;
         }  
 
-        /* Navigation - Stable & Clean */  
+        /* Navigation - Fully Responsive & Aligned */  
         .vertical-nav {  
             display: flex;  
             flex-direction: column;  
             gap: 10px;  
-            width: 190px;  
+            width: 200px;  
             position: relative;  
+            flex-shrink: 0;
         }  
 
         .nav-btn {  
@@ -333,6 +337,7 @@
             align-items: center;
             justify-content: space-between;
             backdrop-filter: blur(12px);
+            width: 100%;
         }  
 
         .vertical-nav .nav-btn:nth-child(1)::after { content: '01'; font-size: 0.7rem; opacity: 0.25; font-family: var(--font-code); }
@@ -587,6 +592,52 @@
             letter-spacing: 0.03em;
         }  
 
+        /* Education Timeline Styles */
+        .edu-timeline { display: flex; flex-direction: column; gap: 1.8rem; max-width: 900px; }  
+        .edu-card {  
+            background: var(--card-bg); 
+            border: 1px solid var(--card-border);  
+            border-radius: 12px; 
+            padding: 2.2rem; 
+            position: relative;  
+            transition: var(--transition-hover);  
+            backdrop-filter: blur(12px);
+        }  
+
+        .edu-card:hover { 
+            border-color: rgba(234, 212, 114, 0.6); 
+            transform: translateY(-4px); 
+            background: rgba(35, 30, 22, 0.9);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6), 0 0 20px rgba(212, 175, 55, 0.2);
+        }  
+        .edu-card.current::before { 
+            content: ''; 
+            position: absolute; 
+            left: -1px; top: -1px; bottom: -1px; 
+            width: 4px; 
+            background: linear-gradient(to bottom, #D4AF37, #EAD472); 
+            border-radius: 12px 0 0 12px; 
+            box-shadow: 0 0 15px #D4AF37;
+        }  
+          
+        .edu-badge-current {  
+            display: inline-block;
+            font-family: var(--font-code); 
+            font-size: 0.65rem; 
+            font-weight: 600;
+            color: var(--cyan-accent);  
+            border: 1px solid rgba(234, 212, 114, 0.5); 
+            background: var(--cyan-accent-dim);
+            padding: 0.3rem 0.8rem; 
+            border-radius: 6px;  
+            letter-spacing: 0.12em;
+            margin-bottom: 0.8rem;
+        }  
+          
+        .edu-degree { font-family: var(--font-heading); font-size: clamp(1.1rem, 2vw, 1.25rem); font-weight: 600; margin-bottom: 0.4rem; color: var(--text-main); }  
+        .edu-institution { font-size: 1rem; color: var(--text-muted); margin-bottom: 0.6rem; font-weight: 400; }  
+        .edu-period { font-family: var(--font-code); font-size: 0.8rem; color: rgba(255, 255, 255, 0.5); letter-spacing: 0.05em; }  
+
         /* =======================================================
            ULTRA-HD ADAPTIVE HORIZONTAL SCROLL CAROUSEL
            ======================================================= */
@@ -662,7 +713,7 @@
 
         .scroll-card-title {
             font-family: var(--font-heading);
-            font-size: clamp(1.6rem, 2.5vw, 2rem);
+            font-size: clamp(1.5rem, 2.3vw, 2rem);
             font-weight: 700;
             color: var(--text-main);
             line-height: 1.2;
@@ -758,27 +809,26 @@
             .scroll-card-image {
                 min-height: 240px;
             }
-            .dashboard-container {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 2.5rem;
-                padding: 2.5rem 1.5rem 1.5rem;
-            }
-            .vertical-nav {
-                flex-direction: row;
-                flex-wrap: wrap;
+            .dashboard-container { 
+                flex-direction: column; 
+                align-items: stretch; 
+                gap: 2rem; 
+                padding: 2.5rem 1.5rem 1.5rem; 
+            }  
+            .vertical-nav { 
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                width: 100%; 
+                gap: 10px; 
+            }  
+            .nav-btn { 
                 width: 100%;
-                gap: 10px;
-            }
-            .nav-btn {
-                width: auto;
-                flex: 1;
-                min-width: 120px;
-                font-size: 0.8rem;
-                padding: 12px 14px;
-                justify-content: center;
-            }
-            .nav-btn::after { display: none; }
+                font-size: 0.8rem; 
+                padding: 12px 14px; 
+                justify-content: center; 
+                text-align: center;
+            }  
+            .vertical-nav .nav-btn::after { display: none; }
             .page-container { padding: 2.5rem 1.5rem 5rem; }
         }
 
@@ -811,48 +861,6 @@
             font-family: var(--font-code); font-size: 0.7rem; color: var(--text-muted);  
             letter-spacing: 0.05em;
         }  
-
-        /* Education Timeline */  
-        .edu-timeline { display: flex; flex-direction: column; gap: 1.8rem; max-width: 900px; }  
-        .edu-card {  
-            background: var(--card-bg); 
-            border: 1px solid var(--card-border);  
-            border-radius: 12px; 
-            padding: 2.2rem; 
-            position: relative;  
-            transition: var(--transition-hover);  
-            backdrop-filter: blur(12px);
-        }  
-
-        .edu-card:hover { 
-            border-color: rgba(234, 212, 114, 0.6); 
-            transform: translateY(-4px); 
-            background: rgba(35, 30, 22, 0.9);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6), 0 0 20px rgba(212, 175, 55, 0.2);
-        }  
-        .edu-card.current::before { 
-            content: ''; 
-            position: absolute; 
-            left: -1px; top: -1px; bottom: -1px; 
-            width: 4px; 
-            background: linear-gradient(to bottom, #D4AF37, #EAD472); 
-            border-radius: 12px 0 0 12px; 
-            box-shadow: 0 0 15px #D4AF37;
-        }  
-          
-        .edu-badge-current {  
-            position: absolute; top: 2.2rem; right: 2.2rem; 
-            font-family: var(--font-code); font-size: 0.65rem; font-weight: 600;
-            color: var(--cyan-accent);  
-            border: 1px solid rgba(234, 212, 114, 0.5); 
-            background: var(--cyan-accent-dim);
-            padding: 0.35rem 0.9rem; border-radius: 6px;  
-            letter-spacing: 0.12em;
-        }  
-          
-        .edu-degree { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text-main); }  
-        .edu-institution { font-size: 1rem; color: var(--text-muted); margin-bottom: 0.6rem; font-weight: 400; }  
-        .edu-period { font-family: var(--font-code); font-size: 0.8rem; color: rgba(255, 255, 255, 0.5); letter-spacing: 0.05em; }  
 
         /* Connect & Social */  
         .social-row { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1.5rem; }  
@@ -992,7 +1000,7 @@
         <h3 class="subtitle">B.TECH AI&DS</h3>  
         <p class="tagline">BUILDING &bull; LEARNING &bull; EXPERIMENTING</p>  
         <div class="stats">  
-            <span id="view-count">--</span>+ Views  
+            <span id="view-count">36</span>+ Views  
         </div>  
     </div>  
       
@@ -1078,7 +1086,7 @@
         </div>  
     </section>  
 
-    <!-- PROJECTS PAGE (UPDATED WITH CORRECT ASSET PATHS) -->  
+    <!-- PROJECTS PAGE (FIXED WITH IMAGE EXTENSIONS) -->  
     <section id="page-projects" class="page">  
         <h2 class="img-style-header reveal-element delay-1">Selected Work</h2>  
 
@@ -1109,7 +1117,7 @@
                         </div>  
                     </div>
                     <div class="scroll-card-image">
-                        <img src="assets/image1" alt="OptiVoyage Preview">
+                        <img src="assets/image1.jpg" onerror="this.onerror=null; this.src='assets/image1.png';" alt="OptiVoyage Preview">
                     </div>
                 </div>  
 
@@ -1127,7 +1135,7 @@
                         </div>  
                     </div>
                     <div class="scroll-card-image">
-                        <img src="assets/image2" alt="NeuroVision AI Preview">
+                        <img src="assets/image2.jpg" onerror="this.onerror=null; this.src='assets/image2.png';" alt="NeuroVision AI Preview">
                     </div>
                 </div>  
 
@@ -1146,7 +1154,7 @@
                         </div>  
                     </div>
                     <div class="scroll-card-image">
-                        <img src="assets/image3" alt="Automation Preview">
+                        <img src="assets/image3.jpg" onerror="this.onerror=null; this.src='assets/image3.png';" alt="Automation Preview">
                     </div>
                 </div>  
 
@@ -1164,7 +1172,7 @@
                         </div>  
                     </div>
                     <div class="scroll-card-image">
-                        <img src="assets/image4" alt="Predictive Analytics Preview">
+                        <img src="assets/image4.jpg" onerror="this.onerror=null; this.src='assets/image4.png';" alt="Predictive Analytics Preview">
                     </div>
                 </div>  
 
@@ -1182,7 +1190,7 @@
                         </div>  
                     </div>
                     <div class="scroll-card-image">
-                        <img src="assets/image5" alt="Customer Segmentation Preview">
+                        <img src="assets/image5.jpg" onerror="this.onerror=null; this.src='assets/image5.png';" alt="Customer Segmentation Preview">
                     </div>
                 </div>  
 
@@ -1201,7 +1209,7 @@
                         </div>  
                     </div>
                     <div class="scroll-card-image">
-                        <img src="assets/image6" alt="Sales Dashboard Preview">
+                        <img src="assets/image6.jpg" onerror="this.onerror=null; this.src='assets/image6.png';" alt="Sales Dashboard Preview">
                     </div>
                 </div>  
 
@@ -1268,24 +1276,28 @@
 
 <!-- Interactive Scripts -->  
 <script>  
-    // Unique Device View Counter using LocalStorage + CountAPI
+    // Bulletproof View Counter using api.counterapi.dev (Reliable & Free API)
     async function updateViewCount() {
         try {
-            const hasVisited = localStorage.getItem('suganya_portfolio_visited');
-
-            if (!hasVisited) {
-                const response = await fetch('https://api.countapi.xyz/hit/suganya_sug_portfolio/visits');
-                const data = await response.json();
-                document.getElementById('view-count').textContent = data.value;
-                localStorage.setItem('suganya_portfolio_visited', 'true');
-            } else {
-                const response = await fetch('https://api.countapi.xyz/get/suganya_sug_portfolio/visits');
-                const data = await response.json();
-                document.getElementById('view-count').textContent = data.value;
+            const sessionCounted = sessionStorage.getItem('portfolio_view_counted');
+            let url = 'https://api.counterapi.dev/v1/suganya_portfolio/visits/up';
+            if (sessionCounted) {
+                url = 'https://api.counterapi.dev/v1/suganya_portfolio/visits';
             }
+
+            const response = await fetch(url);
+            const data = await response.json();
+            
+            if (data && typeof data.count !== 'undefined') {
+                document.getElementById('view-count').textContent = data.count;
+            } else {
+                document.getElementById('view-count').textContent = "36";
+            }
+
+            sessionStorage.setItem('portfolio_view_counted', 'true');
         } catch (error) {
-            console.error("Error fetching view count:", error);
-            document.getElementById('view-count').textContent = "36"; // Fallback number if offline
+            console.error("View counter fallback triggered:", error);
+            document.getElementById('view-count').textContent = "36"; // Fallback static number
         }
     }
 
@@ -1297,7 +1309,6 @@
             introSplash.classList.add('fade-out');
         }, 2400); 
 
-        // Call unique device view counter on load
         updateViewCount();
     });
 
@@ -1422,13 +1433,13 @@
     const filterButtons = document.querySelectorAll('.filter-btn');
     const scrollCards = document.querySelectorAll('.scroll-card');
 
-    scrollLeftBtn.addEventListener('click', () => {
-        scrollTrack.scrollBy({ left: -scrollTrack.clientWidth * 0.8, behavior: 'smooth' });
-    });
+    scrollLeftBtn.addEventListener('click', () => {  
+        scrollTrack.scrollBy({ left: -scrollTrack.clientWidth * 0.8, behavior: 'smooth' });  
+    });  
 
-    scrollRightBtn.addEventListener('click', () => {
-        scrollTrack.scrollBy({ left: scrollTrack.clientWidth * 0.8, behavior: 'smooth' });
-    });
+    scrollRightBtn.addEventListener('click', () => {  
+        scrollTrack.scrollBy({ left: scrollTrack.clientWidth * 0.8, behavior: 'smooth' });  
+    });  
 
     // Filtering Logic for Horizontal Carousel
     filterButtons.forEach(btn => {
@@ -1452,7 +1463,7 @@
     });
 
     // Mouse Glow Interaction (Desktop Only)
-    const mouseGlow = document.getElementById('mouse-glow');  
+    const mouseGroot = document.getElementById('mouse-glow');  
     const isMobile = window.innerWidth <= 768;
 
     if (!isMobile) {
@@ -1462,9 +1473,9 @@
         document.addEventListener('mousemove', (e) => {  
             mouseX = e.clientX;
             mouseY = e.clientY;
-            mouseGlow.style.opacity = '1';  
-            clearTimeout(mouseGlow.timeout);  
-            mouseGlow.timeout = setTimeout(() => { mouseGlow.style.opacity = '0'; }, 2500);  
+            mouseGrows.style.opacity = '1';  
+            clearTimeout(mouseGrows.timeout);  
+            mouseGrows.timeout = setTimeout(() => { mouseGrows.style.opacity = '0'; }, 2500);  
         });  
 
         function updateMouseGlow() {
@@ -1478,4 +1489,3 @@
 </script>  
 </body>  
 </html>
-
