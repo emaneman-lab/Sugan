@@ -992,7 +992,7 @@
         <h3 class="subtitle">B.TECH AI&DS</h3>  
         <p class="tagline">BUILDING &bull; LEARNING &bull; EXPERIMENTING</p>  
         <div class="stats">  
-            <span id="view-count">36</span>+ Views  
+            <span id="view-count">--</span>+ Views  
         </div>  
     </div>  
       
@@ -1078,7 +1078,7 @@
         </div>  
     </section>  
 
-    <!-- PROJECTS PAGE (UPDATED WITH SPECIFIC ASSET PATHS) -->  
+    <!-- PROJECTS PAGE (UPDATED WITH CORRECT ASSET PATHS) -->  
     <section id="page-projects" class="page">  
         <h2 class="img-style-header reveal-element delay-1">Selected Work</h2>  
 
@@ -1136,7 +1136,7 @@
                     <div class="scroll-card-content">
                         <div>
                             <div class="scroll-card-tag">SYSTEM 03 // AUTOMATION</div>
-                            <h3 class="scroll-card-title">Data Cleaning & Reporting Automation</h3>  
+                            <h3 class="scroll-card-title">Data cleaning and reporting Automation</h3>  
                             <p class="scroll-card-desc">Automate data cleaning and reporting workflows. Handle missing values, duplicates, and generate automated visual reports.</p>  
                         </div>
                         <div class="project-tags">  
@@ -1191,7 +1191,7 @@
                     <div class="scroll-card-content">
                         <div>
                             <div class="scroll-card-tag">SYSTEM 06 // ANALYTICS</div>
-                            <h3 class="scroll-card-title">Sales and Revenue Analysis Dashboard</h3>  
+                            <h3 class="scroll-card-title">Sales and revenue analysis dashboard</h3>  
                             <p class="scroll-card-desc">Build a dashboard to analyze sales and revenue data, visualize KPIs like total sales, revenue trends, and top-performing products.</p>  
                         </div>
                         <div class="project-tags">  
@@ -1268,6 +1268,27 @@
 
 <!-- Interactive Scripts -->  
 <script>  
+    // Unique Device View Counter using LocalStorage + CountAPI
+    async function updateViewCount() {
+        try {
+            const hasVisited = localStorage.getItem('suganya_portfolio_visited');
+
+            if (!hasVisited) {
+                const response = await fetch('https://api.countapi.xyz/hit/suganya_sug_portfolio/visits');
+                const data = await response.json();
+                document.getElementById('view-count').textContent = data.value;
+                localStorage.setItem('suganya_portfolio_visited', 'true');
+            } else {
+                const response = await fetch('https://api.countapi.xyz/get/suganya_sug_portfolio/visits');
+                const data = await response.json();
+                document.getElementById('view-count').textContent = data.value;
+            }
+        } catch (error) {
+            console.error("Error fetching view count:", error);
+            document.getElementById('view-count').textContent = "36"; // Fallback number if offline
+        }
+    }
+
     // Cinematic Intro Splash Screen Controller
     window.addEventListener('load', () => {
         const introSplash = document.getElementById('intro-splash');
@@ -1275,6 +1296,9 @@
         setTimeout(() => {
             introSplash.classList.add('fade-out');
         }, 2400); 
+
+        // Call unique device view counter on load
+        updateViewCount();
     });
 
     // Scroll Progress Indicator with Smooth RequestAnimationFrame
@@ -1454,3 +1478,4 @@
 </script>  
 </body>  
 </html>
+
