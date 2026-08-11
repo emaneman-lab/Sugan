@@ -352,19 +352,22 @@
 
         .holo-vault-container { max-width: 850px; margin: 1.5rem auto; position: relative; width: 100%; }
         .vault-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap; }
+        
+        /* Fixed mobile touch rectangle highlight: removed default tap outline & box-shadow */
         .vault-tab-btn {
             background: rgba(15, 12, 5, 0.5); border: 1px solid rgba(212, 175, 55, 0.2);
             color: var(--text-muted); padding: 0.6rem 1.4rem; border-radius: 30px;
             font-family: var(--font-code); font-size: 0.65rem; letter-spacing: 0.18em;
             text-transform: uppercase; cursor: pointer; transition: var(--transition-fast);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); outline: none;
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); 
+            outline: none; -webkit-tap-highlight-color: transparent; box-shadow: none !important;
         }
-        .vault-tab-btn:hover { color: var(--gold-light); border-color: rgba(212, 175, 55, 0.5); background: rgba(212, 175, 55, 0.06); }
-        .vault-tab-btn.active { color: var(--bg-primary); background: var(--gold-gradient); border-color: transparent; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); font-weight: 600; }
+        .vault-tab-btn:hover, .vault-tab-btn:focus, .vault-tab-btn:active { 
+            color: var(--gold-light); border-color: rgba(212, 175, 55, 0.5); background: rgba(212, 175, 55, 0.06); outline: none; box-shadow: none !important;
+        }
+        .vault-tab-btn.active { color: var(--bg-primary); background: var(--gold-gradient); border-color: transparent; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3) !important; font-weight: 600; outline: none; }
 
         .vault-stage { position: relative; min-height: 280px; width: 100%; }
-        
-        /* Fixed mobile height clipping by using standard flex flow or height safety adjustments */
         .vault-panel {
             position: absolute; top: 0; left: 0; width: 100%; background: var(--card-bg);
             border: 1px solid var(--card-border); border-top: 1px solid var(--card-glass-edge);
@@ -374,8 +377,7 @@
             transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s;
             pointer-events: none;
         }
-        .vault-panel.active { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; position: relative; }
-        
+        .vault-panel.active { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
         .vault-panel-header {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(212, 175, 55, 0.15);
@@ -393,6 +395,8 @@
 
         .coverflow-container { position: relative; width: 100%; max-width: 1000px; margin: 1.5rem auto 1rem auto; height: 440px; perspective: 1400px; overflow: hidden; }
         .coverflow-track { position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; transform-style: preserve-3d; left: 0; }
+        
+        /* Fixed project card touch highlight box */
         .project-card {
             position: absolute; width: min(85vw, 420px); height: 400px; background: var(--card-bg);
             border: 1px solid var(--card-border); border-top: 1px solid var(--card-glass-edge);
@@ -401,6 +405,7 @@
             flex-direction: column; justify-content: space-between;
             transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, border-color 0.25s ease;
             cursor: pointer; user-select: none; overflow: hidden;
+            -webkit-tap-highlight-color: transparent; outline: none;
         }
         .project-card:hover { border-color: var(--gold-primary); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1); }
 
@@ -423,6 +428,7 @@
             text-transform: uppercase; letter-spacing: 0.15em; text-decoration: none;
             cursor: pointer; opacity: 0; transform: translateY(6px);
             transition: opacity 0.3s ease 0.12s, transform 0.3s ease 0.12s, background 0.2s, border-color 0.2s;
+            -webkit-tap-highlight-color: transparent; outline: none;
         }
         .project-card.active-center .view-result-btn { opacity: 1; transform: translateY(0); }
         .view-result-btn:hover { background: var(--gold-gradient); color: var(--bg-primary); border-color: transparent; box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3); }
@@ -433,11 +439,14 @@
         .tag { background: rgba(212, 175, 55, 0.05); border: 1px solid rgba(212, 175, 55, 0.2); padding: 0.3rem 0.6rem; border-radius: 4px; font-family: var(--font-code); font-size: 0.6rem; color: var(--text-muted); letter-spacing: 0.08em; }  
 
         .carousel-controls { display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-top: 1rem; }
+        
+        /* Fixed button tap highlight */
         .carousel-arrow-btn {
             background: rgba(15, 12, 5, 0.5); border: 1px solid rgba(212, 175, 55, 0.3);
             color: var(--gold-light); width: 44px; height: 44px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center; cursor: pointer;
-            transition: var(--transition-fast); box-shadow: 0 4px 12px rgba(0,0,0,0.3); outline: none;
+            transition: var(--transition-fast); box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
+            outline: none; -webkit-tap-highlight-color: transparent;
         }
         .carousel-arrow-btn:hover { background: var(--gold-gradient); color: var(--bg-primary); border-color: transparent; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(212, 175, 55, 0.3); }
         .carousel-arrow-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
@@ -473,6 +482,7 @@
             color: var(--gold-light); width: 38px; height: 38px; border-radius: 50%;
             font-size: 1.5rem; display: flex; align-items: center; justify-content: center;
             cursor: pointer; transition: var(--transition-fast); box-shadow: 0 4px 12px rgba(0,0,0,0.5); z-index: 10;
+            outline: none; -webkit-tap-highlight-color: transparent;
         }
         .modal-close:hover { background: var(--gold-gradient); color: var(--bg-primary); transform: rotate(90deg); }
 
@@ -482,6 +492,7 @@
             display: flex; align-items: center; justify-content: center; color: var(--gold-primary); transition: var(--transition-fast);  
             text-decoration: none; position: relative; overflow: hidden; backdrop-filter: blur(10px);
             box-shadow: inset 0 1px 0 rgba(255,223,115,0.1);
+            -webkit-tap-highlight-color: transparent; outline: none;
         }  
         .social-icon-btn svg { position: relative; z-index: 1; width: 20px; height: 20px; transition: transform 0.2s ease; stroke-width: 1.5;}
         .social-icon-btn:hover { transform: translateY(-3px); border-color: var(--gold-light); background: var(--gold-gradient); color: var(--bg-primary); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3); }
@@ -500,6 +511,7 @@
             font-weight: 600; font-size: 0.85rem; font-family: var(--font-body); letter-spacing: 0.08em;
             padding: 0.8rem 2rem; border-radius: 6px; text-decoration: none; transition: var(--transition-fast);  
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+            -webkit-tap-highlight-color: transparent; outline: none;
         }  
         .resume-btn.outline { background: rgba(15, 12, 5, 0.5); color: var(--gold-light); border: 1px solid var(--gold-primary); box-shadow: none; }
         .resume-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4); filter: brightness(1.1); }  
