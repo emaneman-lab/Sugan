@@ -421,29 +421,29 @@
             text-shadow: 0 0 10px rgba(255, 223, 115, 0.5); 
         }
 
-        /* Unified Tech Stack Marquee Bar - Fixed Full Size on Mobile & Desktop */  
+        /* Unified Tech Stack Marquee Bar */  
         .marquee-container {  
             position: relative; width: 100%; overflow: hidden;  
             display: flex; flex-direction: column; gap: 1.2rem; padding: 1rem 0;  
             mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);  
             -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);  
         }  
-        .marquee-track { display: flex; gap: 1.5rem; width: max-content; }  
-        .marquee-track.scroll-left { animation: scrollLeft 40s linear infinite; }  
+        .marquee-track { display: flex; gap: 1.2rem; width: max-content; }  
+        .marquee-track.scroll-left { animation: scrollLeft 35s linear infinite; }  
           
         @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }  
 
-        /* Sleek Pill Skill Cards - Exact Uniform Dimensions for Phone and Laptop */
+        /* Sleek Pill Skill Cards - Perfectly balanced compact size for both mobile and laptop */
         .skill-pill-card {  
             background: var(--card-bg); 
             border: 1px solid var(--card-border);  
             border-top: 1px solid var(--card-glass-edge); 
             border-radius: 50px; 
-            padding: 0.8rem 2.2rem 0.8rem 0.8rem; 
-            min-width: 220px; 
+            padding: 0.5rem 1.4rem 0.5rem 0.5rem; 
+            min-width: 160px; 
             display: flex; 
             align-items: center; 
-            gap: 1.2rem; 
+            gap: 0.8rem; 
             backdrop-filter: blur(20px); 
             -webkit-backdrop-filter: blur(20px);
             box-shadow: 0 6px 25px rgba(0,0,0,0.35); 
@@ -458,7 +458,7 @@
         }
         
         .skill-icon-wrapper {  
-            width: 44px; height: 44px; 
+            width: 32px; height: 32px; 
             background: rgba(0, 0, 0, 0.6); 
             border: 1px solid rgba(212, 175, 55, 0.25); 
             border-radius: 50%; 
@@ -466,10 +466,10 @@
             box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.15); 
             flex-shrink: 0;
         }  
-        .skill-icon-wrapper img { width: 22px; height: 22px; object-fit: contain; }  
+        .skill-icon-wrapper img { width: 16px; height: 16px; object-fit: contain; }  
         .skill-name { 
             font-family: var(--font-body); 
-            font-size: 1.05rem; 
+            font-size: 0.85rem; 
             font-weight: 500; 
             color: #F0F0F0; 
             letter-spacing: 0.08em; 
