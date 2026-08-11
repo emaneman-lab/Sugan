@@ -363,6 +363,8 @@
         .vault-tab-btn.active { color: var(--bg-primary); background: var(--gold-gradient); border-color: transparent; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); font-weight: 600; }
 
         .vault-stage { position: relative; min-height: 280px; width: 100%; }
+        
+        /* Fixed mobile height clipping by using standard flex flow or height safety adjustments */
         .vault-panel {
             position: absolute; top: 0; left: 0; width: 100%; background: var(--card-bg);
             border: 1px solid var(--card-border); border-top: 1px solid var(--card-glass-edge);
@@ -372,7 +374,8 @@
             transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s;
             pointer-events: none;
         }
-        .vault-panel.active { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
+        .vault-panel.active { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; position: relative; }
+        
         .vault-panel-header {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(212, 175, 55, 0.15);
