@@ -227,7 +227,7 @@
             font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; word-spacing: 4px;
         }  
 
-        /* Ultra-Premium Golden Live Tracker - Unblockable HTML version */
+        /* Ultra-Premium Golden Live Tracker - Fixed Visibility */
         .live-stats-badge {
             display: inline-flex;
             align-items: center;
@@ -242,6 +242,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(255, 223, 115, 0.1);
             transition: var(--transition-premium);
             cursor: default;
+            opacity: 1; /* Always visible */
         }
 
         .live-stats-badge:hover {
@@ -337,10 +338,26 @@
         .nav-btn:hover { color: var(--gold-light); background: rgba(212, 175, 55, 0.1); transform: translateY(-2px); }  
         .nav-btn.active { color: var(--bg-primary); background: var(--gold-gradient); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }  
         
+        /* MOBILE MEDIA QUERY */
         @media(max-width: 768px) {
             .dashboard-container { flex-direction: column; align-items: center; text-align: center; padding: 2.5rem 1.5rem 1.5rem; }
             .profile-info h3 { justify-content: center; }
             .vertical-nav { margin-top: 1.5rem; }
+            
+            .highlight-badges { gap: 0.8rem; justify-content: center; }
+            .highlight-badge { 
+                padding: 0.5rem 0.8rem; 
+                font-size: 0.65rem; 
+                letter-spacing: 0.1em; 
+            }
+            
+            .project-card { 
+                padding: 2rem 1.5rem; 
+                height: auto; 
+                min-height: auto; 
+                gap: 1rem; 
+            }
+            .projects-grid { grid-template-columns: 1fr; gap: 1.5rem; margin-top: 1.5rem; }
         }
 
         /* Page Content Area */  
@@ -400,6 +417,7 @@
             color: var(--gold-primary); background: rgba(212, 175, 55, 0.05);  
             border: 1px solid rgba(212, 175, 55, 0.3); padding: 0.6rem 1.2rem; border-radius: 4px;  
             letter-spacing: 0.15em; text-transform: uppercase; transition: var(--transition-fast);
+            display: inline-flex; align-items: center; justify-content: center; text-align: center; line-height: 1.2;
         }  
         .highlight-badge:hover { background: rgba(212, 175, 55, 0.15); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2); color: var(--gold-light); border-color: var(--gold-light); }
 
@@ -417,21 +435,40 @@
         @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }  
         @keyframes scrollRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }  
 
+        /* Sleek Pill Skill Cards */
         .skill-pill-card {  
-            background: var(--card-bg); border: 1px solid var(--card-border);  
-            border-top: 1px solid var(--card-glass-edge); border-radius: 8px; padding: 0.7rem 1.4rem 0.7rem 0.7rem;  
-            display: flex; align-items: center; gap: 1.2rem; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4); transition: var(--transition-premium);
+            background: var(--card-bg); 
+            border: 1px solid var(--card-border);  
+            border-top: 1px solid var(--card-glass-edge); 
+            border-radius: 50px; 
+            padding: 0.4rem 1.2rem 0.4rem 0.4rem; 
+            display: flex; align-items: center; gap: 0.8rem; 
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3); 
+            transition: var(--transition-premium);
         }  
-        .skill-pill-card:hover { border-color: var(--gold-primary); transform: translateY(-3px); background: rgba(212, 175, 55, 0.05); }
+        .skill-pill-card:hover { 
+            border-color: var(--gold-primary); 
+            transform: translateY(-3px); 
+            background: rgba(212, 175, 55, 0.05); 
+        }
         
         .skill-icon-wrapper {  
-            width: 38px; height: 38px; background: rgba(0, 0, 0, 0.6); 
-            border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 6px;  
-            display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.1); 
+            width: 32px; height: 32px; 
+            background: rgba(0, 0, 0, 0.6); 
+            border: 1px solid rgba(212, 175, 55, 0.2); 
+            border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; 
+            box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.1); 
         }  
-        .skill-icon-wrapper img { width: 20px; height: 20px; object-fit: contain; }  
-        .skill-name { font-family: var(--font-body); font-size: 0.85rem; font-weight: 400; color: #F0F0F0; letter-spacing: 0.05em; }  
+        .skill-icon-wrapper img { width: 16px; height: 16px; object-fit: contain; }  
+        .skill-name { 
+            font-family: var(--font-body); 
+            font-size: 0.85rem; 
+            font-weight: 500; 
+            color: #F0F0F0; 
+            letter-spacing: 0.1em; 
+        }  
 
         /* Academic Timeline */
         .edu-timeline { display: flex; flex-direction: column; gap: 1.5rem; max-width: 900px; }  
@@ -459,7 +496,8 @@
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 2.5rem; margin-top: 1.5rem; }
 
         .project-card {
-            position: relative; width: 100%; height: 100%;
+            position: relative; width: 100%; 
+            height: auto; min-height: 420px; 
             background: var(--card-bg); border: 1px solid var(--card-border);
             border-top: 1px solid var(--card-glass-edge); border-radius: 16px;
             overflow: hidden; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
@@ -507,6 +545,7 @@
         .project-tags { 
             display: flex; flex-wrap: wrap; gap: 0.6rem; 
             margin-top: auto;
+            padding-top: 1.5rem; 
         }  
         .tag {  
             background: rgba(212, 175, 55, 0.05); border: 1px solid rgba(212, 175, 55, 0.2);  
@@ -625,7 +664,7 @@
         <p class="tagline">B.Tech Artificial Intelligence & Data Science</p>  
         
         <!-- Unblockable Custom HTML Live Tracker Badge -->
-        <div class="live-stats-badge reveal-element delay-1">
+        <div class="live-stats-badge">
             <div class="pulse-container">
                 <span class="pulsing-dot"></span>
                 <span class="pulse-label">LIVE</span>
@@ -633,7 +672,6 @@
             
             <div class="live-stats-divider"></div>
             
-            <!-- Pure HTML & CSS Badge (Immune to AdBlockers) -->
             <div class="custom-gold-badge">
                 <div class="badge-label">VIEWS</div>
                 <div class="badge-count" id="view-counter">...</div>
