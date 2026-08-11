@@ -478,164 +478,137 @@
         }  
 
         /* ==========================================================
-           HOLOGRAPHIC ORBITAL PEDIGREE (Academic Showcase redesign)
+           INTERACTIVE 3D HOLO-VAULT PEDIGREE (Academic Showcase redesign)
            ========================================================== */
-        .orbit-pedigree-container {
-            position: relative;
-            max-width: 900px;
+        .holo-vault-container {
+            max-width: 850px;
             margin: 2rem auto;
-            min-height: 480px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .central-core {
-            position: absolute;
-            width: 140px;
-            height: 140px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, rgba(5, 5, 5, 0.9) 80%);
-            border: 1px solid var(--gold-primary);
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            z-index: 5;
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.2), inset 0 0 20px rgba(255, 223, 115, 0.2);
-            animation: corePulse 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes corePulse {
-            0% { transform: scale(1); box-shadow: 0 0 30px rgba(212, 175, 55, 0.15), inset 0 0 15px rgba(255, 223, 115, 0.15); }
-            100% { transform: scale(1.05); box-shadow: 0 0 50px rgba(255, 223, 115, 0.3), inset 0 0 25px rgba(255, 223, 115, 0.3); }
-        }
-
-        .core-icon {
-            font-size: 1.5rem;
-            color: var(--gold-light);
-            margin-bottom: 2px;
-            text-shadow: 0 0 10px var(--gold-light);
-        }
-
-        .core-label {
-            font-family: var(--font-code);
-            font-size: 0.55rem;
-            letter-spacing: 0.2em;
-            color: var(--gold-primary);
-            text-transform: uppercase;
-        }
-
-        .orbit-nodes-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            width: 100%;
             position: relative;
-            z-index: 10;
         }
 
-        .orbit-node {
+        .vault-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 2.5rem;
+        }
+
+        .vault-tab-btn {
+            background: rgba(15, 12, 5, 0.5);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            color: var(--text-muted);
+            padding: 0.7rem 1.8rem;
+            border-radius: 30px;
+            font-family: var(--font-code);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .vault-tab-btn:hover {
+            color: var(--gold-light);
+            border-color: rgba(212, 175, 55, 0.5);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .vault-tab-btn.active {
+            color: var(--bg-primary);
+            background: var(--gold-gradient);
+            border-color: transparent;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+            font-weight: 600;
+        }
+
+        .vault-stage {
+            position: relative;
+            min-height: 320px;
+            perspective: 1200px;
+        }
+
+        .vault-panel {
+            position: absolute;
+            top: 0; left: 0; width: 100%;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-top: 1px solid var(--card-glass-edge);
-            border-radius: 16px;
-            padding: 2.2rem 1.8rem;
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.5), inset 0 0 15px rgba(212, 175, 55, 0.03);
-            transition: var(--transition-smooth);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            overflow: hidden;
-            cursor: default;
+            border-radius: 20px;
+            padding: 3rem;
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 30px rgba(212, 175, 55, 0.05);
+            opacity: 0;
+            visibility: hidden;
+            transform: rotateX(15deg) translateY(30px) scale(0.95);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                        opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                        visibility 0.8s;
+            pointer-events: none;
+            will-change: transform, opacity;
         }
 
-        .orbit-node::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 2px;
-            background: var(--gold-gradient);
-            opacity: 0.4;
-            transition: var(--transition-fast);
-        }
-
-        .orbit-node:hover {
-            border-color: var(--gold-primary);
-            transform: translateY(-8px) scale(1.02);
-            background: rgba(25, 20, 10, 0.8);
-            box-shadow: 0 25px 50px rgba(212, 175, 55, 0.2), inset 0 0 25px rgba(255, 223, 115, 0.08);
-        }
-
-        .orbit-node:hover::before {
+        .vault-panel.active {
             opacity: 1;
-            box-shadow: 0 0 15px var(--gold-light);
+            visibility: visible;
+            transform: rotateX(0deg) translateY(0) scale(1);
+            pointer-events: auto;
         }
 
-        .node-meta-top {
+        .vault-panel-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
         }
 
-        .node-index {
-            font-family: var(--font-code);
-            font-size: 0.65rem;
-            color: var(--gold-primary);
-            letter-spacing: 0.2em;
-        }
-
-        .node-badge-status {
-            font-family: var(--font-code);
-            font-size: 0.55rem;
-            font-weight: 600;
-            color: var(--bg-primary);
-            background: var(--gold-gradient);
-            padding: 0.25rem 0.6rem;
-            border-radius: 4px;
-            letter-spacing: 0.15em;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-        }
-
-        .node-title {
-            font-family: var(--font-heading);
-            font-size: 1.25rem;
-            font-weight: 300;
-            color: var(--gold-light);
-            margin-bottom: 0.6rem;
-            line-height: 1.3;
-            letter-spacing: -0.01em;
-        }
-
-        .node-institution {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            font-weight: 300;
-            margin-bottom: 1.2rem;
-            line-height: 1.5;
-        }
-
-        .node-footer {
+        .vault-index-tag {
             font-family: var(--font-code);
             font-size: 0.7rem;
-            color: rgba(212, 175, 55, 0.7);
-            letter-spacing: 0.05em;
-            border-top: 1px solid rgba(212, 175, 55, 0.1);
-            padding-top: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            color: var(--gold-primary);
+            letter-spacing: 0.25em;
         }
 
-        .node-footer svg {
-            width: 12px; height: 12px;
-            stroke: var(--gold-primary);
-            fill: none;
-            stroke-width: 2;
+        .vault-status-pill {
+            font-family: var(--font-code);
+            font-size: 0.6rem;
+            color: var(--bg-primary);
+            background: var(--gold-gradient);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+        }
+
+        .vault-degree-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--gold-light);
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+        }
+
+        .vault-institution-name {
+            font-size: 1.05rem;
+            color: var(--text-main);
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        .vault-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-weight: 300;
         }
 
         /* ==========================================================
@@ -854,8 +827,9 @@
                 display: none; 
             }
             
-            .orbit-nodes-grid { grid-template-columns: 1fr; gap: 1.2rem; }
-            .orbit-pedigree-container { min-height: auto; }
+            .vault-tabs { flex-wrap: wrap; gap: 8px; }
+            .vault-tab-btn { padding: 0.5rem 1.2rem; font-size: 0.65rem; }
+            .vault-panel { padding: 2rem 1.5rem; }
             
             .page-container { padding: 2rem 1.25rem 5rem; }
             .coverflow-container { height: 460px; }
@@ -977,55 +951,53 @@
         </div>  
     </section>  
 
-    <!-- EDUCATION PAGE (Redesigned into Holographic Orbital Pedigree) -->  
+    <!-- EDUCATION PAGE (Redesigned into Interactive 3D Holo-Vault Showcase) -->  
     <section id="page-education" class="page">  
         <h2 class="img-style-header reveal-element delay-1">Academic Pedigree</h2>  
           
-        <div class="orbit-pedigree-container reveal-element delay-2">
-            <div class="orbit-nodes-grid">  
-                <div class="orbit-node">
-                    <div>
-                        <div class="node-meta-top">
-                            <span class="node-index">01 // HIGHER ED</span>
-                            <span class="node-badge-status">PRESENT</span>
-                        </div>
-                        <h3 class="node-title">B.Tech AI & Data Science</h3>  
-                        <div class="node-institution">JP College of Engineering (JPCOE), Tenkasi &mdash; Anna University</div>  
-                    </div>
-                    <div class="node-footer">
-                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        <span>Algorithms & Neural Networks</span>
-                    </div>
-                </div>  
+        <div class="holo-vault-container reveal-element delay-2">
+            <!-- Interactive Vault Navigation Tabs -->
+            <div class="vault-tabs">
+                <button type="button" class="vault-tab-btn active" onclick="switchVaultTab(0)">01 // B.Tech AI & DS</button>
+                <button type="button" class="vault-tab-btn" onclick="switchVaultTab(1)">02 // Higher Sec.</button>
+                <button type="button" class="vault-tab-btn" onclick="switchVaultTab(2)">03 // Matriculation</button>
+            </div>
 
-                <div class="orbit-node">
-                    <div>
-                        <div class="node-meta-top">
-                            <span class="node-index">02 // SEC. ED</span>
-                        </div>
-                        <h3 class="node-title">Higher Secondary Education</h3>  
-                        <div class="node-institution">TMT Manjammal Girls Govt HR Sec School, Tenkasi</div>  
+            <!-- Vault Stages / 3D Panels -->
+            <div class="vault-stage">
+                <!-- Panel 1 -->
+                <div class="vault-panel active" id="vault-panel-0">
+                    <div class="vault-panel-header">
+                        <span class="vault-index-tag">NODE 01 // HIGHER EDUCATION</span>
+                        <span class="vault-status-pill">PRESENT</span>
                     </div>
-                    <div class="node-footer">
-                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        <span>Advanced Mathematics & Sciences</span>
-                    </div>
-                </div>  
+                    <h3 class="vault-degree-title">B.Tech Artificial Intelligence & Data Science</h3>
+                    <div class="vault-institution-name">JP College of Engineering (JPCOE), Tenkasi &mdash; Anna University</div>
+                    <p class="vault-desc">Building robust theoretical and practical foundations in advanced neural network architectures, predictive modeling, machine learning pipelines, and scalable data systems.</p>
+                </div>
 
-                <div class="orbit-node">
-                    <div>
-                        <div class="node-meta-top">
-                            <span class="node-index">03 // FOUNDATION</span>
-                        </div>
-                        <h3 class="node-title">Matriculation</h3>  
-                        <div class="node-institution">St. John's Matric HR Sec School, Tenkasi</div>  
+                <!-- Panel 2 -->
+                <div class="vault-panel" id="vault-panel-1">
+                    <div class="vault-panel-header">
+                        <span class="vault-index-tag">NODE 02 // SECONDARY STUDIES</span>
+                        <span class="vault-status-pill" style="background: rgba(212, 175, 55, 0.2); color: var(--gold-light);">COMPLETED</span>
                     </div>
-                    <div class="node-footer">
-                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        <span>Core Foundations</span>
+                    <h3 class="vault-degree-title">Higher Secondary Education</h3>
+                    <div class="vault-institution-name">TMT Manjammal Girls Govt HR Sec School, Tenkasi</div>
+                    <p class="vault-desc">Rigorous specialized coursework focusing on advanced mathematics, analytical physics, and foundational computer logic systems.</p>
+                </div>
+
+                <!-- Panel 3 -->
+                <div class="vault-panel" id="vault-panel-2">
+                    <div class="vault-panel-header">
+                        <span class="vault-index-tag">NODE 03 // FOUNDATIONAL ROOTS</span>
+                        <span class="vault-status-pill" style="background: rgba(212, 175, 55, 0.2); color: var(--gold-light);">COMPLETED</span>
                     </div>
-                </div>  
-            </div>  
+                    <h3 class="vault-degree-title">Matriculation</h3>
+                    <div class="vault-institution-name">St. John's Matric HR Sec School, Tenkasi</div>
+                    <p class="vault-desc">Core foundational education establishing structured problem-solving methodologies, scientific literacy, and academic discipline.</p>
+                </div>
+            </div>
         </div>
     </section>  
 
@@ -1278,6 +1250,22 @@
             }  
         });  
     });  
+
+    /* ==========================================================
+       INTERACTIVE 3D HOLO-VAULT TAB CONTROLLER
+       ========================================================== */
+    const vaultTabs = document.querySelectorAll('.vault-tab-btn');
+    const vaultPanels = document.querySelectorAll('.vault-panel');
+
+    function switchVaultTab(index) {
+        vaultTabs.forEach((tab, idx) => {
+            tab.classList.toggle('active', idx === index);
+        });
+
+        vaultPanels.forEach((panel, idx) => {
+            panel.classList.toggle('active', idx === index);
+        });
+    }
 
     /* ==========================================================
        3D COVERFLOW CAROUSEL LOGIC (ULTRA-SMOOTH SPRING)
