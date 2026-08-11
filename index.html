@@ -224,20 +224,40 @@
         .profile-info .tagline {  
             font-family: var(--font-code); font-size: 0.65rem; color: var(--text-muted);  
             font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; word-spacing: 2px;
-            display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 0.5rem;
+            display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 1rem;
         }  
 
-        /* Clean Minimalist Views Badge Style matching exactly what you need */
+        /* Stacked Layout Wrapper to separate Degree Title from the Counter Badge perfectly */
+        .header-meta-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            margin-top: 0.5rem;
+        }
+
+        .degree-text {
+            font-family: var(--font-code); 
+            font-size: 0.65rem; 
+            color: var(--text-muted);  
+            font-weight: 300; 
+            letter-spacing: 0.2em; 
+            text-transform: uppercase; 
+            word-spacing: 2px;
+        }
+
+        /* Clean and Perfectly Balanced Views Badge Style */
         .live-stats-badge {
-            display: inline-flex; align-items: center;
+            display: inline-flex; align-items: center; justify-content: center;
             background: rgba(15, 12, 5, 0.85); 
             border: 1px solid rgba(212, 175, 55, 0.35); 
             border-radius: 50px; 
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(255, 223, 115, 0.08);
             transition: var(--transition-smooth); cursor: default;
-            vertical-align: middle;
             overflow: hidden;
+            height: 26px;
+            padding: 0 3px;
         }
 
         .live-stats-badge:hover {
@@ -247,14 +267,14 @@
         }
 
         .custom-gold-badge {
-            display: flex; height: 22px; border-radius: 50px; overflow: hidden;
-            border: none; align-items: center;
+            display: flex; height: 20px; border-radius: 50px; overflow: hidden;
+            border: none; align-items: center; justify-content: center;
         }
         
         .badge-count {
             background: var(--bg-primary); color: var(--text-main); padding: 0 8px;
             font-family: var(--font-code); font-size: 0.65rem; font-weight: 500;
-            display: flex; align-items: center; height: 100%;
+            display: flex; align-items: center; justify-content: center; height: 100%;
         }
 
         .vertical-nav {  
@@ -591,17 +611,18 @@
     <div class="profile-info">  
         <h3>open to opportunities</h3>
         <h1>SUGANYA</h1>  
-        <p class="tagline">
-            <span>B.TECH ARTIFICIAL INTELLIGENCE & DATA SCIENCE</span>
-            <!-- Clean badge containing only the view count image (Komarev tracker handles formatting) -->
+        
+        <!-- Stacked container with perfectly balanced layout gap and clean spacing from the horizontal line below -->
+        <div class="header-meta-stack">
+            <span class="degree-text">B.TECH ARTIFICIAL INTELLIGENCE & DATA SCIENCE</span>
             <div class="live-stats-badge">
                 <div class="custom-gold-badge">
-                    <div class="badge-count" style="background: #050505; display: flex; align-items: center; padding: 0;">
+                    <div class="badge-count" style="background: #050505; display: flex; align-items: center; justify-content: center; padding: 0;">
                         <img src="https://komarev.com/ghpvc/?username=suganyas2382006-sketch&color=d4af37&style=flat-square" alt="Views" style="height: 22px; display: block;" />
                     </div>
                 </div>
             </div>
-        </p>  
+        </div>
     </div>  
       
     <nav class="vertical-nav" id="main-nav">  
@@ -1182,6 +1203,7 @@
 
         requestAnimationFrame(drawLiquidGoldWaves);
     }
+    drawLiquidGoldViews = drawLiquidGoldWaves;
     drawLiquidGoldWaves();
 
     const mouseGlow = document.getElementById('mouse-glow');  
@@ -1196,7 +1218,7 @@
             mouseY = e.clientY;
             mouseGlow.style.opacity = '1';  
             clearTimeout(mouseGlow.timeout);  
-            mouseGlow.timeout = setTimeout(() => { mouseN = mouseGlow.style.opacity = '0'; }, 3000);  
+            mouseGlow.timeout = setTimeout(() => { mouseGlow.style.opacity = '0'; }, 3000);  
         });  
 
         function updateMouseGlow() {
