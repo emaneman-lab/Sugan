@@ -13,9 +13,9 @@
             /* Pure Obsidian & 24k Gold Palette */  
             --bg-primary: #050505;  
             --bg-secondary: #0a0a0a;  
-            --card-bg: rgba(15, 12, 5, 0.4);  
-            --card-border: rgba(212, 175, 55, 0.2);  
-            --card-glass-edge: rgba(255, 223, 115, 0.05);
+            --card-bg: rgba(15, 12, 5, 0.7);  
+            --card-border: rgba(212, 175, 55, 0.25);  
+            --card-glass-edge: rgba(255, 223, 115, 0.08);
               
             /* Premium Gold Accents */  
             --gold-light: #FFDF73;    /* Brilliant Gold */
@@ -34,7 +34,7 @@
             --font-code: 'Fira Code', monospace;  
 
             /* Premium Easing Curve */  
-            --transition-premium: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-smooth: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
             --transition-fast: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }  
 
@@ -69,7 +69,6 @@
             -moz-osx-font-smoothing: grayscale;
         }  
         
-        /* Prevent scroll when modal is open */
         body.modal-open {
             overflow: hidden;
         }
@@ -236,7 +235,7 @@
             border-radius: 50px; 
             backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(255, 223, 115, 0.1);
-            transition: var(--transition-premium); cursor: default; opacity: 1;
+            transition: var(--transition-smooth); cursor: default; opacity: 1;
         }
 
         .live-stats-badge:hover {
@@ -356,7 +355,7 @@
             opacity: 0.4;
         }
 
-        .reveal-element { opacity: 0; transform: translateY(20px); transition: var(--transition-premium); }  
+        .reveal-element { opacity: 0; transform: translateY(20px); transition: var(--transition-smooth); }  
         .reveal-element.visible { opacity: 1; transform: translateY(0); }  
         .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; } .delay-3 { transition-delay: 0.3s; }
 
@@ -370,9 +369,9 @@
         .editorial-summary blockquote {  
             font-size: clamp(1.2rem, 2.2vw, 1.8rem); line-height: 1.6;  
             font-weight: 300; color: var(--text-main); margin-bottom: 2rem; position: relative;
-            border-left: none; /* Removes left border */
-            padding-left: 0;   /* Clears left padding */
-            background: none;  /* Clears background gradient */
+            border-left: none; 
+            padding-left: 0;   
+            background: none;  
         }  
 
         .typing-cursor {
@@ -392,7 +391,7 @@
             scrollbar-width: none; 
             padding-bottom: 5px;
             align-items: center;
-            justify-content: center; /* Centers items horizontally */
+            justify-content: center; 
         }  
         .highlight-badges::-webkit-scrollbar { display: none; }
         
@@ -450,7 +449,7 @@
             backdrop-filter: blur(20px); 
             -webkit-backdrop-filter: blur(20px);
             box-shadow: 0 6px 25px rgba(0,0,0,0.35); 
-            transition: var(--transition-premium);
+            transition: var(--transition-smooth);
         }  
         .skill-pill-card:hover { 
             border-color: var(--gold-primary); 
@@ -478,73 +477,224 @@
             white-space: nowrap;
         }  
 
-        /* Academic Timeline */
-        .edu-timeline { display: flex; flex-direction: column; gap: 1.5rem; max-width: 900px; margin: 0 auto; }  
-        .edu-card {  
-            background: var(--card-bg); border: 1px solid var(--card-border);  
-            border-left: 3px solid var(--gold-primary); border-radius: 12px; padding: 2rem; position: relative;  
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3); transition: var(--transition-premium);
-        }  
-        .edu-card:hover { border-color: var(--gold-primary); background: rgba(25, 20, 10, 0.6); transform: translateX(10px); box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15); }
-
-        .edu-badge-current {  
-            display: inline-block; font-family: var(--font-code); font-size: 0.65rem; font-weight: 600;
-            color: var(--bg-primary); background: var(--gold-gradient); padding: 0.4rem 0.8rem; 
-            border-radius: 4px; letter-spacing: 0.15em; margin-bottom: 1rem; box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
-        }  
-        .edu-degree { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 300; margin-bottom: 0.4rem; color: var(--gold-light); }  
-        .edu-institution { font-size: 1rem; color: var(--text-main); margin-bottom: 0.8rem; font-weight: 300; }  
-        .edu-period { font-family: var(--font-code); font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.1em; }  
-
-        /* Premium Minimalist Projects Layout (Tabs/Accordions instead of cluttered boxes) */
-        .projects-container {
+        /* ==========================================================
+           HOLOGRAPHIC ORBITAL PEDIGREE (Academic Showcase redesign)
+           ========================================================== */
+        .orbit-pedigree-container {
+            position: relative;
             max-width: 900px;
-            margin: 0 auto;
+            margin: 2rem auto;
+            min-height: 480px;
             display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+            align-items: center;
+            justify-content: center;
         }
 
-        .project-row {
+        .central-core {
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, rgba(5, 5, 5, 0.9) 80%);
+            border: 1px solid var(--gold-primary);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 5;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.2), inset 0 0 20px rgba(255, 223, 115, 0.2);
+            animation: corePulse 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes corePulse {
+            0% { transform: scale(1); box-shadow: 0 0 30px rgba(212, 175, 55, 0.15), inset 0 0 15px rgba(255, 223, 115, 0.15); }
+            100% { transform: scale(1.05); box-shadow: 0 0 50px rgba(255, 223, 115, 0.3), inset 0 0 25px rgba(255, 223, 115, 0.3); }
+        }
+
+        .core-icon {
+            font-size: 1.5rem;
+            color: var(--gold-light);
+            margin-bottom: 2px;
+            text-shadow: 0 0 10px var(--gold-light);
+        }
+
+        .core-label {
+            font-family: var(--font-code);
+            font-size: 0.55rem;
+            letter-spacing: 0.2em;
+            color: var(--gold-primary);
+            text-transform: uppercase;
+        }
+
+        .orbit-nodes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .orbit-node {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 14px;
-            padding: 2rem;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transition: var(--transition-premium);
+            border-top: 1px solid var(--card-glass-edge);
+            border-radius: 16px;
+            padding: 2.2rem 1.8rem;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5), inset 0 0 15px rgba(212, 175, 55, 0.03);
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+        }
+
+        .orbit-node::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--gold-gradient);
+            opacity: 0.4;
+            transition: var(--transition-fast);
+        }
+
+        .orbit-node:hover {
+            border-color: var(--gold-primary);
+            transform: translateY(-8px) scale(1.02);
+            background: rgba(25, 20, 10, 0.8);
+            box-shadow: 0 25px 50px rgba(212, 175, 55, 0.2), inset 0 0 25px rgba(255, 223, 115, 0.08);
+        }
+
+        .orbit-node:hover::before {
+            opacity: 1;
+            box-shadow: 0 0 15px var(--gold-light);
+        }
+
+        .node-meta-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .node-index {
+            font-family: var(--font-code);
+            font-size: 0.65rem;
+            color: var(--gold-primary);
+            letter-spacing: 0.2em;
+        }
+
+        .node-badge-status {
+            font-family: var(--font-code);
+            font-size: 0.55rem;
+            font-weight: 600;
+            color: var(--bg-primary);
+            background: var(--gold-gradient);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            letter-spacing: 0.15em;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .node-title {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 300;
+            color: var(--gold-light);
+            margin-bottom: 0.6rem;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+        }
+
+        .node-institution {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            margin-bottom: 1.2rem;
+            line-height: 1.5;
+        }
+
+        .node-footer {
+            font-family: var(--font-code);
+            font-size: 0.7rem;
+            color: rgba(212, 175, 55, 0.7);
+            letter-spacing: 0.05em;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            padding-top: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .node-footer svg {
+            width: 12px; height: 12px;
+            stroke: var(--gold-primary);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* ==========================================================
+           3D COVERFLOW CAROUSEL (Center Active, Left/Right Stacked Behind)
+           ========================================================== */
+        .coverflow-container {
             position: relative;
-            overflow: hidden;
+            width: 100%;
+            max-width: 1000px;
+            margin: 2rem auto 1rem auto;
+            height: 520px;
+            perspective: 1400px;
+            overflow: visible;
         }
 
-        .project-row:hover {
-            border-color: var(--gold-primary);
-            background: rgba(25, 20, 10, 0.6);
-            transform: translateY(-4px);
-            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15);
+        .coverflow-track {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-style: preserve-3d;
         }
 
-        .project-info-side {
-            flex: 1;
-        }
-
-        .project-action-side {
+        .project-card {
+            position: absolute;
+            width: 460px;
+            height: 460px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-top: 1px solid var(--card-glass-edge);
+            border-radius: 20px;
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.7), 0 0 35px rgba(212, 175, 55, 0.08);
+            padding: 2.5rem;
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
-            gap: 1rem;
-            flex-shrink: 0;
+            justify-content: space-between;
+            /* ULTRA-SMOOTH SPRING TRANSITION */
+            transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                        opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                        filter 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                        border-color 0.4s ease;
+            cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            will-change: transform, opacity, filter;
         }
 
-        .scroll-card-tag { font-family: var(--font-code); font-size: 0.65rem; color: var(--gold-primary); margin-bottom: 0.6rem; letter-spacing: 0.2em; }
-        .scroll-card-title { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 300; margin-bottom: 0.6rem; line-height: 1.2; letter-spacing: -0.02em; color: var(--gold-light); }
-        .scroll-card-desc { color: var(--text-main); font-size: 0.9rem; line-height: 1.6; font-weight: 300; margin-bottom: 1rem; }
+        .project-card:hover {
+            border-color: var(--gold-primary);
+            box-shadow: 0 30px 70px rgba(212, 175, 55, 0.3);
+        }
+
+        .scroll-card-tag { font-family: var(--font-code); font-size: 0.65rem; color: var(--gold-primary); margin-bottom: 0.8rem; letter-spacing: 0.2em; }
+        .scroll-card-title { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 300; margin-bottom: 0.8rem; line-height: 1.2; letter-spacing: -0.02em; color: var(--gold-light); }
+        .scroll-card-desc { color: var(--text-main); font-size: 0.95rem; line-height: 1.6; font-weight: 300; margin-bottom: 1.2rem; }
 
         .view-result-btn {
             display: inline-flex; align-items: center; gap: 8px; padding: 0.6rem 1.2rem;
@@ -556,21 +706,85 @@
         }
         .view-result-btn:hover { background: var(--gold-gradient); color: var(--bg-primary); border-color: transparent; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3); }
 
-        .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: flex-start; }  
-        .tag { background: rgba(212, 175, 55, 0.05); border: 1px solid rgba(212, 175, 55, 0.2); padding: 0.3rem 0.7rem; border-radius: 4px; font-family: var(--font-code); font-size: 0.6rem; color: var(--gold-light); letter-spacing: 0.05em; }  
+        .project-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: auto; padding-top: 1rem; border-top: 1px solid rgba(212, 175, 55, 0.1); }  
+        .tag { background: rgba(212, 175, 55, 0.05); border: 1px solid rgba(212, 175, 55, 0.2); padding: 0.4rem 0.8rem; border-radius: 4px; font-family: var(--font-code); font-size: 0.65rem; color: var(--gold-light); letter-spacing: 0.05em; }  
+
+        /* Carousel Navigation Controls */
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .carousel-arrow-btn {
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--gold-light);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .carousel-arrow-btn:hover {
+            background: var(--gold-gradient);
+            color: var(--bg-primary);
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        }
+        .carousel-arrow-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .indicator-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+        .indicator-dot.active {
+            background: var(--gold-primary);
+            width: 24px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px var(--gold-light);
+        }
 
         /* Image Modal / Lightbox Overlay */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             z-index: 999999; display: flex; align-items: center; justify-content: center;
-            opacity: 0; visibility: hidden; transition: var(--transition-premium);
+            opacity: 0; visibility: hidden; transition: var(--transition-smooth);
         }
         .modal-overlay.active { opacity: 1; visibility: visible; }
         
         .modal-content {
             position: relative; max-width: 90%; max-height: 90vh;
-            transform: scale(0.95) translateY(20px); transition: var(--transition-premium);
+            transform: scale(0.95) translateY(20px); transition: var(--transition-smooth);
             opacity: 0; display: flex; flex-direction: column; align-items: center;
         }
         .modal-overlay.active .modal-content { transform: scale(1) translateY(0); opacity: 1; }
@@ -597,7 +811,7 @@
         .social-row { display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; }  
         .social-icon-btn {  
             width: 60px; height: 60px; border-radius: 50%; background: rgba(212, 175, 55, 0.05); border: 1px solid rgba(212, 175, 55, 0.3);  
-            display: flex; align-items: center; justify-content: center; color: var(--gold-primary); transition: var(--transition-premium);  
+            display: flex; align-items: center; justify-content: center; color: var(--gold-primary); transition: var(--transition-smooth);  
             text-decoration: none; position: relative; overflow: hidden; backdrop-filter: blur(10px);
         }  
         .social-icon-btn svg { position: relative; z-index: 1; width: 24px; height: 24px; transition: var(--transition-fast); stroke-width: 1.5;}
@@ -614,7 +828,7 @@
             display: inline-flex; align-items: center; gap: 10px; justify-content: center;  
             background: var(--gold-gradient); color: var(--bg-primary); 
             font-weight: 600; font-size: 0.9rem; font-family: var(--font-body); letter-spacing: 0.05em;
-            padding: 1rem 2.5rem; border-radius: 6px; text-decoration: none; transition: var(--transition-premium);  
+            padding: 1rem 2.5rem; border-radius: 6px; text-decoration: none; transition: var(--transition-smooth);  
         }  
         .resume-btn.outline { background: rgba(212, 175, 55, 0.05); color: var(--gold-light); border: 1px solid var(--gold-primary); }
         .resume-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5); filter: brightness(1.1); }  
@@ -631,7 +845,6 @@
             .profile-info h3 { justify-content: center; }
             .vertical-nav { margin-top: 1.5rem; }
             
-            /* CENTERED HEADERS ON MOBILE */
             .img-style-header { 
                 justify-content: center; 
                 text-align: center; 
@@ -641,9 +854,12 @@
                 display: none; 
             }
             
+            .orbit-nodes-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+            .orbit-pedigree-container { min-height: auto; }
+            
             .page-container { padding: 2rem 1.25rem 5rem; }
-            .project-row { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 1.5rem; }
-            .project-action-side { align-items: flex-start; width: 100%; flex-direction: row; justify-content: space-between; }
+            .coverflow-container { height: 460px; }
+            .project-card { width: 320px; height: 420px; padding: 1.8rem; }
             
             .modal-close { top: -50px; right: 0; width: 40px; height: 40px; }
             
@@ -761,113 +977,183 @@
         </div>  
     </section>  
 
-    <!-- EDUCATION PAGE -->  
+    <!-- EDUCATION PAGE (Redesigned into Holographic Orbital Pedigree) -->  
     <section id="page-education" class="page">  
         <h2 class="img-style-header reveal-element delay-1">Academic Pedigree</h2>  
           
-        <div class="edu-timeline">  
-            <div class="edu-card reveal-element delay-1">  
-                <div class="edu-badge-current">PRESENT</div>  
-                <div class="edu-degree">B.Tech Artificial Intelligence & Data Science</div>  
-                <div class="edu-institution">JP College of Engineering (JPCOE), Tenkasi &mdash; Anna University</div>  
-                <div class="edu-period">Building foundations in algorithms, neural networks, and scalable data architectures.</div>  
+        <div class="orbit-pedigree-container reveal-element delay-2">
+            <div class="orbit-nodes-grid">  
+                <div class="orbit-node">
+                    <div>
+                        <div class="node-meta-top">
+                            <span class="node-index">01 // HIGHER ED</span>
+                            <span class="node-badge-status">PRESENT</span>
+                        </div>
+                        <h3 class="node-title">B.Tech AI & Data Science</h3>  
+                        <div class="node-institution">JP College of Engineering (JPCOE), Tenkasi &mdash; Anna University</div>  
+                    </div>
+                    <div class="node-footer">
+                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>Algorithms & Neural Networks</span>
+                    </div>
+                </div>  
+
+                <div class="orbit-node">
+                    <div>
+                        <div class="node-meta-top">
+                            <span class="node-index">02 // SEC. ED</span>
+                        </div>
+                        <h3 class="node-title">Higher Secondary Education</h3>  
+                        <div class="node-institution">TMT Manjammal Girls Govt HR Sec School, Tenkasi</div>  
+                    </div>
+                    <div class="node-footer">
+                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>Advanced Mathematics & Sciences</span>
+                    </div>
+                </div>  
+
+                <div class="orbit-node">
+                    <div>
+                        <div class="node-meta-top">
+                            <span class="node-index">03 // FOUNDATION</span>
+                        </div>
+                        <h3 class="node-title">Matriculation</h3>  
+                        <div class="node-institution">St. John's Matric HR Sec School, Tenkasi</div>  
+                    </div>
+                    <div class="node-footer">
+                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>Core Foundations</span>
+                    </div>
+                </div>  
             </div>  
-            <div class="edu-card reveal-element delay-2">  
-                <div class="edu-degree">Higher Secondary Education</div>  
-                <div class="edu-institution">TMT Manjammal Girls Govt HR Sec School, Tenkasi</div>  
-                <div class="edu-period">Advanced studies in Mathematics and Sciences.</div>  
-            </div>  
-            <div class="edu-card reveal-element delay-3">  
-                <div class="edu-degree">Matriculation</div>  
-                <div class="edu-institution">St. John's Matric HR Sec School, Tenkasi</div>  
-                <div class="edu-period">Core foundational education.</div>  
-            </div>  
-        </div>  
+        </div>
     </section>  
 
     <!-- PROJECTS PAGE -->  
     <section id="page-projects" class="page">  
         <h2 class="img-style-header reveal-element delay-1">Selected Systems</h2>  
-          
-        <div class="projects-container reveal-element delay-2">
-            
-            <!-- Project 1 -->  
-            <div class="project-row">  
-                <div class="project-info-side">
-                    <div class="scroll-card-tag">01 // AI & VISION</div>
-                    <h3 class="scroll-card-title">NeuroVision AI</h3>  
-                    <p class="scroll-card-desc">AI-powered MRI analysis combining deep learning, medical image classification, severity analysis, and explainable AI interfaces.</p>  
+        
+        <!-- 3D Coverflow Project Carousel -->
+        <div class="coverflow-container reveal-element delay-2" id="coverflow-container">
+            <div class="coverflow-track" id="coverflow-track" onwheel="handleWheelScroll(event)">
+                
+                <!-- Project 1 -->  
+                <div class="project-card" onclick="handleCardClick(0)">  
+                    <div>
+                        <div class="scroll-card-tag">01 // ANALYTICS</div>
+                        <h3 class="scroll-card-title">Sales & Revenue Dashboard</h3>  
+                        <p class="scroll-card-desc">Build a dashboard to analyze sales and revenue data with performance trends and category insights.</p>  
+                        <button type="button" class="view-result-btn" onclick="event.stopPropagation(); openModal('assets/image1.jpg')">
+                            <span>View Result</span>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        </button>
+                    </div>
                     <div class="project-tags">  
-                        <span class="tag">TensorFlow</span>  
+                        <span class="tag">Python</span>  
+                        <span class="tag">Data Analytics</span>  
+                    </div>  
+                </div>  
+
+                <!-- Project 2 -->  
+                <div class="project-card" onclick="handleCardClick(1)">  
+                    <div>
+                        <div class="scroll-card-tag">02 // CLUSTERING</div>
+                        <h3 class="scroll-card-title">Customer Segmentation</h3>  
+                        <p class="scroll-card-desc">Segment customers based on behavior and demographics with actionable insights and demographic distribution.</p>  
+                        <button type="button" class="view-result-btn" onclick="event.stopPropagation(); openModal('assets/image2.jpg')">
+                            <span>View Result</span>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        </button>
+                    </div>
+                    <div class="project-tags">  
+                        <span class="tag">Machine Learning</span>  
                         <span class="tag">Python</span>  
                     </div>  
-                </div>
-                <div class="project-action-side">
-                    <button type="button" class="view-result-btn" onclick="openModal('assets/image2.jpg')">
-                        <span>View Result</span>
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                    </button>
-                </div>
-            </div>  
+                </div>  
 
-            <!-- Project 2 -->  
-            <div class="project-row">  
-                <div class="project-info-side">
-                    <div class="scroll-card-tag">02 // OPTIMIZATION</div>
-                    <h3 class="scroll-card-title">OptiVoyage</h3>  
-                    <p class="scroll-card-desc">Intelligent maritime routing system to identify optimized vessel routes while analyzing distance, ETA, fuel savings, and CO₂ reduction.</p>  
-                    <div class="project-tags">  
-                        <span class="tag">AI Data</span>  
-                        <span class="tag">SQL</span>  
-                    </div>  
-                </div>
-                <div class="project-action-side">
-                    <button type="button" class="view-result-btn" onclick="openModal('assets/image1.jpg')">
-                        <span>View Result</span>
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                    </button>
-                </div>
-            </div>  
-
-            <!-- Project 3 -->  
-            <div class="project-row">  
-                <div class="project-info-side">
-                    <div class="scroll-card-tag">03 // AUTOMATION</div>
-                    <h3 class="scroll-card-title">Data Pipeline</h3>  
-                    <p class="scroll-card-desc">Automated data cleaning and reporting workflows. Handling missing values, duplicates, and generating automated visual reports.</p>  
+                <!-- Project 3 -->  
+                <div class="project-card" onclick="handleCardClick(2)">  
+                    <div>
+                        <div class="scroll-card-tag">03 // AUTOMATION</div>
+                        <h3 class="scroll-card-title">Data Cleaning & Reporting</h3>  
+                        <p class="scroll-card-desc">Automate data cleaning and reporting workflows to handle missing values, duplicates, and workflow status.</p>  
+                        <button type="button" class="view-result-btn" onclick="event.stopPropagation(); openModal('assets/image3.jpg')">
+                            <span>View Result</span>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        </button>
+                    </div>
                     <div class="project-tags">  
                         <span class="tag">Python</span>  
                         <span class="tag">Power BI</span>  
                     </div>  
-                </div>
-                <div class="project-action-side">
-                    <button type="button" class="view-result-btn" onclick="openModal('assets/image3.jpg')">
-                        <span>View Result</span>
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                    </button>
-                </div>
-            </div>  
+                </div>  
 
-            <!-- Project 4 -->  
-            <div class="project-row">  
-                <div class="project-info-side">
-                    <div class="scroll-card-tag">04 // MODELING</div>
-                    <h3 class="scroll-card-title">Predictive Analytics</h3>  
-                    <p class="scroll-card-desc">Constructing predictive models to forecast future trends using regression and time-series algorithms on preprocessed datasets.</p>  
+                <!-- Project 4 -->  
+                <div class="project-card" onclick="handleCardClick(3)">  
+                    <div>
+                        <div class="scroll-card-tag">04 // MODELING</div>
+                        <h3 class="scroll-card-title">Predictive Analytics</h3>  
+                        <p class="scroll-card-desc">Build a predictive model to forecast future trends using time-series forecast and historical records.</p>  
+                        <button type="button" class="view-result-btn" onclick="event.stopPropagation(); openModal('assets/image4.jpg')">
+                            <span>View Result</span>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        </button>
+                    </div>
                     <div class="project-tags">  
                         <span class="tag">Regression</span>  
                         <span class="tag">Time-Series</span>  
                     </div>  
-                </div>
-                <div class="project-action-side">
-                    <button type="button" class="view-result-btn" onclick="openModal('assets/image4.jpg')">
-                        <span>View Result</span>
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                    </button>
-                </div>
-            </div>  
+                </div>  
 
-        </div>  
+                <!-- Project 5 -->  
+                <div class="project-card" onclick="handleCardClick(4)">  
+                    <div>
+                        <div class="scroll-card-tag">05 // AI & VISION</div>
+                        <h3 class="scroll-card-title">NeuroVision AI</h3>  
+                        <p class="scroll-card-desc">AI-powered MRI analysis combining deep learning classification, clinical interpretability, and attention map heatmaps.</p>  
+                        <button type="button" class="view-result-btn" onclick="event.stopPropagation(); openModal('assets/image5.jpg')">
+                            <span>View Result</span>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        </button>
+                    </div>
+                    <div class="project-tags">  
+                        <span class="tag">TensorFlow</span>  
+                        <span class="tag">OpenCV</span>  
+                    </div>  
+                </div>  
+
+                <!-- Project 6 -->  
+                <div class="project-card" onclick="handleCardClick(5)">  
+                    <div>
+                        <div class="scroll-card-tag">06 // OPTIMIZATION</div>
+                        <h3 class="scroll-card-title">OptiVoyage</h3>  
+                        <p class="scroll-card-desc">AI powered maritime route optimization system for fuel savings, CO2 reduction, and smart vessel routing.</p>  
+                        <button type="button" class="view-result-btn" onclick="event.stopPropagation(); openModal('assets/image6.jpg')">
+                            <span>View Result</span>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        </button>
+                    </div>
+                    <div class="project-tags">  
+                        <span class="tag">AI Data</span>  
+                        <span class="tag">SQL</span>  
+                    </div>  
+                </div>  
+
+            </div>
+        </div>
+
+        <!-- Carousel Controls -->
+        <div class="carousel-controls reveal-element delay-3">
+            <button class="carousel-arrow-btn" onclick="moveCarousel(-1)" aria-label="Previous Project">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <div class="carousel-indicators" id="carousel-indicators">
+                <!-- Injected via JS -->
+            </div>
+            <button class="carousel-arrow-btn" onclick="moveCarousel(1)" aria-label="Next Project">
+                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+        </div>
     </section>  
 
     <!-- CONNECT PAGE -->  
@@ -992,6 +1278,127 @@
             }  
         });  
     });  
+
+    /* ==========================================================
+       3D COVERFLOW CAROUSEL LOGIC (ULTRA-SMOOTH SPRING)
+       ========================================================== */
+    const cards = document.querySelectorAll('.coverflow-track .project-card');
+    const indicatorsContainer = document.getElementById('carousel-indicators');
+    let currentIndex = 0;
+    let isAnimating = false;
+
+    // Create indicator dots
+    cards.forEach((_, idx) => {
+        const dot = document.createElement('div');
+        dot.className = `indicator-dot ${idx === 0 ? 'active' : ''}`;
+        dot.addEventListener('click', () => goToCard(idx));
+        indicatorsContainer.appendChild(dot);
+    });
+
+    const indicators = indicatorsContainer.querySelectorAll('.indicator-dot');
+
+    function updateCoverflow() {
+        const isMobile = window.innerWidth <= 768;
+        const spacing = isMobile ? 240 : 360;
+
+        cards.forEach((card, idx) => {
+            const offset = idx - currentIndex;
+            
+            if (offset === 0) {
+                // Center active card
+                card.style.transform = `translateX(0px) translateZ(0px) rotateY(0deg) scale(1)`;
+                card.style.opacity = '1';
+                card.style.zIndex = '15';
+                card.style.pointerEvents = 'auto';
+                card.style.filter = 'blur(0px)';
+            } else if (offset < 0) {
+                // Cards stacked smoothly behind to the left
+                const absOffset = Math.abs(offset);
+                card.style.transform = `translateX(${-spacing * absOffset}px) translateZ(${-180 * absOffset}px) rotateY(38deg) scale(${Math.max(0.68, 1 - absOffset * 0.15)})`;
+                card.style.opacity = Math.max(0.15, 1 - absOffset * 0.4);
+                card.style.zIndex = `${15 - absOffset}`;
+                card.style.pointerEvents = 'none';
+                card.style.filter = `blur(${absOffset * 3}px)`;
+            } else {
+                // Cards stacked smoothly behind to the right
+                card.style.transform = `translateX(${spacing * offset}px) translateZ(${-180 * offset}px) rotateY(-38deg) scale(${Math.max(0.68, 1 - offset * 0.15)})`;
+                card.style.opacity = Math.max(0.15, 1 - offset * 0.4);
+                card.style.zIndex = `${15 - offset}`;
+                card.style.pointerEvents = 'none';
+                card.style.filter = `blur(${offset * 3}px)`;
+            }
+        });
+
+        // Update indicators
+        indicators.forEach((dot, idx) => {
+            dot.classList.toggle('active', idx === currentIndex);
+        });
+    }
+
+    function moveCarousel(direction) {
+        if (isAnimating) return;
+        isAnimating = true;
+        
+        currentIndex += direction;
+        if (currentIndex < 0) {
+            currentIndex = cards.length - 1;
+        } else if (currentIndex >= cards.length) {
+            currentIndex = 0;
+        }
+        updateCoverflow();
+
+        setTimeout(() => { isAnimating = false; }, 850);
+    }
+
+    function goToCard(index) {
+        if (isAnimating || index === currentIndex) return;
+        isAnimating = true;
+        currentIndex = index;
+        updateCoverflow();
+        setTimeout(() => { isAnimating = false; }, 850);
+    }
+
+    function handleCardClick(index) {
+        goToCard(index);
+    }
+
+    // Smooth Wheel / Trackpad Scroll Support
+    let wheelAccumulator = 0;
+    function handleWheelScroll(e) {
+        e.preventDefault();
+        wheelAccumulator += e.deltaX || e.deltaY;
+        if (Math.abs(wheelAccumulator) > 60) {
+            if (wheelAccumulator > 0) {
+                moveCarousel(1);
+            } else {
+                moveCarousel(-1);
+            }
+            wheelAccumulator = 0;
+        }
+    }
+
+    // Swipe / Touch support for Coverflow
+    let touchStartX = 0;
+    const trackEl = document.getElementById('coverflow-container');
+
+    trackEl.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    trackEl.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].clientX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 40) {
+            if (diff > 0) {
+                moveCarousel(1); // Swipe Left -> Next
+            } else {
+                moveCarousel(-1); // Swipe Right -> Prev
+            }
+        }
+    });
+
+    // Initialize Coverflow state
+    updateCoverflow();
 
     /* ============================================================
        PURE GOLD LIQUID LIGHT CANVAS
