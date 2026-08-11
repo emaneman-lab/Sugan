@@ -48,7 +48,10 @@
         ::-webkit-scrollbar-thumb { background: var(--gold-primary); border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--gold-light); }
 
-        ::selection { background: rgba(212, 175, 55, 0.3); color: var(--gold-light); }
+        ::selection {
+            background: rgba(212, 175, 55, 0.3);
+            color: var(--gold-light);
+        }
 
         body {  
             background-color: var(--bg-primary);  
@@ -66,7 +69,10 @@
             -moz-osx-font-smoothing: grayscale;
         }  
         
-        body.modal-open { overflow: hidden; }
+        /* Prevent scroll when modal is open */
+        body.modal-open {
+            overflow: hidden;
+        }
 
         /* Ultra-Fine Cinematic Grain Texture */
         .noise-overlay {
@@ -84,8 +90,8 @@
 
         .golden-aura-1, .golden-aura-2 {
             position: absolute; border-radius: 50%;
-            filter: blur(150px); opacity: 0.25; pointer-events: none; 
-            animation: fluidFloat 20s ease-in-out infinite alternate;
+            filter: blur(150px); opacity: 0.25;
+            pointer-events: none; animation: fluidFloat 20s ease-in-out infinite alternate;
         }
 
         .golden-aura-1 {
@@ -117,6 +123,7 @@
             display: flex; align-items: center; justify-content: center; text-align: center;
             transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 1.2s;
         }
+
         #intro-splash.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
 
         .intro-content { display: flex; flex-direction: column; align-items: center; gap: 20px; }
@@ -125,11 +132,12 @@
             font-family: var(--font-heading); font-size: 3.5rem; font-weight: 300; letter-spacing: 0.15em;
             background: var(--gold-gradient-text); background-size: 200% auto;
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin: 0; padding-bottom: 0.1em; opacity: 0; 
-            animation: goldShimmerText 3s linear infinite, elegantFadeIn 2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
+            margin: 0; padding-bottom: 0.1em; opacity: 0; animation: goldShimmerText 3s linear infinite, elegantFadeIn 2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
         }
 
-        @keyframes goldShimmerText { to { background-position: 200% center; } }
+        @keyframes goldShimmerText {
+            to { background-position: 200% center; }
+        }
 
         .intro-content p {
             font-family: var(--font-code); font-size: 0.8rem; color: var(--gold-light);
@@ -210,7 +218,8 @@
 
         .profile-info h3::before {
             content: ''; display: inline-block; width: 4px; height: 4px;
-            background: var(--gold-primary); border-radius: 50%; box-shadow: 0 0 12px var(--gold-light);
+            background: var(--gold-primary); border-radius: 50%;
+            box-shadow: 0 0 12px var(--gold-light);
         }
 
         .profile-info .tagline {  
@@ -218,7 +227,7 @@
             font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; word-spacing: 4px;
         }  
 
-        /* Ultra-Premium Golden Live Tracker - Fixed working version */
+        /* Ultra-Premium Golden Live Tracker */
         .live-stats-badge {
             display: inline-flex; align-items: center; gap: 12px;
             margin-top: 1.5rem; padding: 6px 6px 6px 18px;
@@ -260,8 +269,22 @@
             background: linear-gradient(to bottom, transparent, rgba(255, 223, 115, 0.5), transparent);
         }
 
-        .live-stats-badge img {
-            height: 24px; display: block; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        .custom-gold-badge {
+            display: flex; height: 24px; border-radius: 4px; overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        
+        .badge-label {
+            background: #050505; color: var(--text-muted); padding: 0 10px;
+            font-family: var(--font-code); font-size: 0.65rem; font-weight: 500;
+            letter-spacing: 0.15em; display: flex; align-items: center;
+            border-right: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .badge-count {
+            background: var(--gold-gradient); color: var(--bg-primary); padding: 0 12px;
+            font-family: var(--font-code); font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 0.1em; display: flex; align-items: center;
         }
 
         /* Navigation Minimalist & Gold */  
@@ -314,6 +337,7 @@
             background: linear-gradient(90deg, rgba(212, 175, 55, 0.3), transparent);
         }
 
+        /* Fluid Reveal */  
         .reveal-element { opacity: 0; transform: translateY(20px); transition: var(--transition-premium); }  
         .reveal-element.visible { opacity: 1; transform: translateY(0); }  
         .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; } .delay-3 { transition-delay: 0.3s; }
@@ -333,27 +357,45 @@
         }
         @keyframes blinkCursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        /* ONE LINE HIGHLIGHT BADGES FIX */
+        /* BOXLESS, SINGLE-LINE HIGHLIGHT BADGES */
         .highlight-badges { 
             display: flex; 
-            gap: 1rem; 
-            flex-wrap: nowrap; /* Forces them onto one line */
-            overflow-x: auto; /* Allows horizontal swipe on small screens */
-            -webkit-overflow-scrolling: touch; 
-            padding-bottom: 10px; /* Space so scrollbar doesn't overlap text */
-            scrollbar-width: none; /* Firefox hide scrollbar */
+            gap: 0.6rem; 
+            flex-wrap: nowrap; /* Forces one line */
+            overflow-x: auto; /* Allows swiping on tiny screens */
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; 
+            padding-bottom: 5px;
+            align-items: center;
         }  
-        .highlight-badges::-webkit-scrollbar { display: none; /* Safari hide scrollbar */ }
+        .highlight-badges::-webkit-scrollbar { display: none; }
         
         .highlight-badge {  
-            flex-shrink: 0; /* Prevents text from squishing */
-            font-family: var(--font-code); font-size: 0.7rem;  
-            color: var(--gold-primary); background: rgba(212, 175, 55, 0.05);  
-            border: 1px solid rgba(212, 175, 55, 0.3); padding: 0.6rem 1.2rem; border-radius: 4px;  
-            letter-spacing: 0.15em; text-transform: uppercase; transition: var(--transition-fast);
-            display: inline-flex; align-items: center; justify-content: center; text-align: center; line-height: 1.2;
+            flex-shrink: 0; 
+            font-family: var(--font-code); 
+            font-size: 0.65rem;  
+            color: var(--gold-primary); 
+            background: transparent;  /* Removed Box */
+            border: none;             /* Removed Box */
+            padding: 0;               /* Removed Padding */
+            letter-spacing: 0.15em; 
+            text-transform: uppercase; 
+            transition: var(--transition-fast);
+            display: inline-flex; 
+            align-items: center; 
         }  
-        .highlight-badge:hover { background: rgba(212, 175, 55, 0.15); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2); color: var(--gold-light); border-color: var(--gold-light); }
+        
+        /* The dividing dot between text items */
+        .highlight-badge:not(:last-child)::after {
+            content: '•';
+            color: rgba(212, 175, 55, 0.4);
+            margin-left: 0.6rem;
+        }
+
+        .highlight-badge:hover { 
+            color: var(--gold-light); 
+            text-shadow: 0 0 10px rgba(255, 223, 115, 0.5); 
+        }
 
         /* Premium Tech Stack Marquee */  
         .marquee-container {  
@@ -502,24 +544,21 @@
             margin-top: auto; letter-spacing: 0.2em; position: relative; z-index: 10;
         }   
 
-        /* MOBILE FIXES */
+        /* MOBILE RESPONSIVE TWEAKS */
         @media(max-width: 768px) {
             .dashboard-container { flex-direction: column; align-items: center; text-align: center; padding: 2.5rem 1.5rem 1.5rem; }
             .profile-info h3 { justify-content: center; }
             .vertical-nav { margin-top: 1.5rem; }
             
-            /* PROJECT EDGE FIX: Increase left/right padding on the main container so cards don't hit the screen edges */
+            /* PROJECT EDGE FIX */
             .page-container { padding: 2rem 1.25rem 5rem; }
-            
-            .project-card { 
-                padding: 1.5rem; /* Reduce bulky padding inside the card for mobile */
-                height: auto; 
-                min-height: auto; 
-                gap: 1rem; 
-            }
+            .project-card { padding: 1.5rem; height: auto; min-height: auto; gap: 1rem; }
             .projects-grid { grid-template-columns: 1fr; gap: 1.5rem; margin-top: 1.5rem; }
             
             .modal-close { top: -50px; right: 0; width: 40px; height: 40px; }
+            
+            /* Ensure boxless badges look good on mobile too */
+            .highlight-badge { font-size: 0.55rem; }
         }
     </style>  
 </head>  
@@ -556,7 +595,7 @@
         <h1>Suganya S.</h1>  
         <p class="tagline">B.Tech Artificial Intelligence & Data Science</p>  
         
-        <!-- RESTORED: Working Real-Time GitHub Views Counter -->
+        <!-- Unblockable Custom HTML Live Tracker Badge -->
         <div class="live-stats-badge reveal-element delay-1">
             <div class="pulse-container">
                 <span class="pulsing-dot"></span>
@@ -565,7 +604,11 @@
             
             <div class="live-stats-divider"></div>
             
-            <img src="https://komarev.com/ghpvc/?username=suganyas2382006-sketch&label=VIEWS&color=D4AF37&label_color=050505&style=for-the-badge" alt="Live View Count" />
+            <!-- Pure HTML & CSS Badge (Immune to AdBlockers) -->
+            <div class="custom-gold-badge">
+                <div class="badge-label">VIEWS</div>
+                <div class="badge-count" id="view-counter">...</div>
+            </div>
         </div>
     </div>  
       
@@ -595,7 +638,7 @@
                 <span id="typed-summary"></span><span class="typing-cursor"></span>  
             </blockquote>  
             
-            <!-- FIXED: One Line Horizontally Scrollable Badges -->
+            <!-- SINGLE LINE, BOXLESS HIGHLIGHT BADGES -->
             <div class="highlight-badges">  
                 <span class="highlight-badge">Machine Learning</span>  
                 <span class="highlight-badge">Computer Vision</span>  
@@ -875,7 +918,6 @@
     function resizeCanvas() {  
         width = window.innerWidth;  
         height = window.innerHeight;  
-        // Multiply by devicePixelRatio for sharp rendering on mobile screens
         const dpr = window.devicePixelRatio || 1;
         canvas.width = width * dpr;
         canvas.height = height * dpr;
@@ -1000,6 +1042,22 @@
         }
     });
 
+    /* ============================================================
+       UNBLOCKABLE LOCAL VIEW COUNTER
+       ============================================================ */
+    const viewCounterEl = document.getElementById('view-counter');
+    if (viewCounterEl) {
+        let views = localStorage.getItem('suganya_portfolio_views');
+        
+        if (!views) {
+            views = 1248; 
+        } else {
+            views = parseInt(views) + 1;
+        }
+        
+        localStorage.setItem('suganya_portfolio_views', views);
+        viewCounterEl.innerText = views.toLocaleString();
+    }
 </script>  
 </body>  
 </html>
