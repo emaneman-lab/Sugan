@@ -222,10 +222,27 @@
             animation: heroEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) 2.0s forwards;
         }  
 
+        /* --- GLOSSY PULSING DOT --- */
         .profile-info h3::before {
-            content: ''; display: inline-block; width: 4px; height: 4px;
-            background: var(--gold-primary); border-radius: 50%;
-            box-shadow: 0 0 10px var(--gold-light);
+            content: ''; 
+            display: inline-block; 
+            width: 7px; 
+            height: 7px;
+            background: radial-gradient(circle at 30% 30%, #fff, var(--gold-primary));
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--gold-light), 0 0 15px var(--gold-primary);
+            animation: glossyPulse 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glossyPulse {
+            0% {
+                box-shadow: 0 0 5px var(--gold-light), 0 0 10px var(--gold-primary);
+                transform: scale(0.9);
+            }
+            100% {
+                box-shadow: 0 0 12px #fff, 0 0 20px var(--gold-light), 0 0 30px var(--gold-primary);
+                transform: scale(1.15);
+            }
         }
 
         .header-meta-stack {
