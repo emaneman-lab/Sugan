@@ -312,31 +312,24 @@
         }
         @keyframes blinkCursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        .highlight-badges { display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center; justify-content: flex-start; }  
-        
-        .highlight-badge {  
-            flex-shrink: 0; 
-            font-family: var(--font-code); 
-            font-size: 0.6rem;  
-            color: var(--gold-light); 
-            background: rgba(212, 175, 55, 0.05); 
-            border: 1px solid rgba(212, 175, 55, 0.2);             
-            padding: 0.35rem 0.9rem;               
-            border-radius: 4px;
-            letter-spacing: 0.15em; 
-            text-transform: uppercase; 
-            transition: all 0.25s ease;
-            display: inline-flex; 
-            align-items: center; 
-        }  
-        
-        .highlight-badge:not(:last-child)::after { content: none; margin-left: 0; }
+        .highlight-inline-text {
+            font-family: var(--font-code);
+            font-size: 0.8rem;
+            color: var(--gold-light);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: nowrap;
+            white-space: nowrap;
+            overflow-x: auto;
+            width: 100%;
+        }
 
-        .highlight-badge:hover { 
-            background: var(--gold-gradient);
-            color: var(--bg-primary);
-            border-color: transparent;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        .highlight-inline-text span {
+            color: var(--gold-primary);
+            font-weight: 300;
         }
 
         .marquee-container {  
@@ -561,7 +554,7 @@
             .page-container { padding: 1.5rem 1rem 4rem; width: 100%; overflow: hidden; }
             .coverflow-container { height: 380px; width: 100%; }
             .project-card { width: 85vw; height: 360px; padding: 1.5rem; }
-            .highlight-badge { font-size: 0.6rem; }
+            .highlight-inline-text { font-size: 0.7rem; }
         }
     </style>  
 </head>  
@@ -659,10 +652,8 @@
                 <span id="typed-summary"></span><span class="typing-cursor"></span>  
             </blockquote>  
             
-            <div class="highlight-badges">  
-                <span class="highlight-badge">BUILDING</span>  
-                <span class="highlight-badge">LEARNING</span>  
-                <span class="highlight-badge">EXPERIMENTING</span>  
+            <div class="highlight-inline-text">  
+                BUILDING <span>|</span> LEARNING <span>|</span> EXPERIMENTING  
             </div>  
         </div>  
     </section>  
@@ -1120,7 +1111,6 @@
     window.addEventListener('resize', resizeCanvas);  
     resizeCanvas();  
 
-    // Pure Sparkles / Particle Field with NO waves
     const sparks = Array.from({ length: 80 }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
