@@ -180,6 +180,9 @@
 
         .profile-info { position: relative; flex: 1; min-width: 0; width: 100%; }
 
+        /* ==========================================================
+           UPGRADED HERO NAME ANIMATION
+           ========================================================== */
         .profile-info h1 {  
             font-family: var(--font-heading); 
             font-size: clamp(2.2rem, 5vw, 4.8rem);  
@@ -193,13 +196,30 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 0.3rem; 
             word-break: break-word;
+            
+            opacity: 0;
+            filter: blur(10px);
+            transform: translateY(20px);
+            animation: 
+                heroEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) 2.2s forwards,
+                textShimmer 5s linear infinite; 
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+            cursor: default;
         }  
+
+        .profile-info h1:hover {
+            transform: scale(1.02) translateY(-2px);
+            filter: drop-shadow(0 12px 24px rgba(212, 175, 55, 0.25));
+        }
 
         .profile-info h3 {  
             font-family: var(--font-heading); color: var(--gold-primary);  
             font-size: 0.75rem; font-weight: 500; margin-bottom: 0.6rem;  
             letter-spacing: 0.3em; text-transform: uppercase;  
             display: flex; align-items: center; gap: 10px;
+            opacity: 0;
+            transform: translateY(15px);
+            animation: heroEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) 2.0s forwards;
         }  
 
         .profile-info h3::before {
@@ -214,7 +234,16 @@
             align-items: flex-start;
             gap: 12px;
             margin-top: 0.5rem;
+            opacity: 0;
+            transform: translateY(15px);
+            animation: heroEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) 2.4s forwards;
         }
+
+        @keyframes heroEntrance {
+            0% { opacity: 0; transform: translateY(20px); filter: blur(8px); }
+            100% { opacity: 1; transform: translateY(0); filter: blur(0px); }
+        }
+        /* ========================================================== */
 
         .degree-text {
             font-family: var(--font-code); 
